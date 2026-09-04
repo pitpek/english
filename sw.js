@@ -1,7 +1,6 @@
-const CACHE = "english-cards-v4";
+const CACHE = "english-cards-v8";
 const ASSETS = [
   "./index.html",
-  "./Английский.html",
   "./data/words.json",
   "./css/app.css",
   "./js/app.js",
@@ -11,10 +10,10 @@ const ASSETS = [
   "./js/dictionary.js",
   "./js/util.js",
   "./manifest.json",
-  "./icon.svg",
-  "./icon-192.png",
-  "./icon-512.png",
-  "./apple-touch-icon.png",
+  "./icons/icon.svg",
+  "./icons/icon-192.png",
+  "./icons/icon-512.png",
+  "./icons/apple-touch-icon.png",
 ];
 
 self.addEventListener("install", (event) => {

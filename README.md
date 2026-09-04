@@ -1,3 +1,3 @@
-# english
+# Тренажёр карточек: 
 
-Тренажёр карточек: https://pitpek.github.io/english/
+https://pitpek.github.io/english/

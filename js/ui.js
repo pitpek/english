@@ -25,7 +25,8 @@ export function updateFilterToggle() {
   if (!btn) return;
   const lAll = new Set(state.all.map((w) => w.level)).size;
   const cAll = new Set(state.all.map((w) => w.category)).size;
-  btn.textContent = `Фильтры · ${state.selectedLevels.size}/${lAll} · ${state.selectedCats.size}/${cAll}`;
+  btn.textContent = "Фильтры";
+  btn.title = `${state.selectedLevels.size}/${lAll} · ${state.selectedCats.size}/${cAll}`;
 }
 
 export function applyFilters() {
@@ -143,7 +144,7 @@ function renderCards() {
         <div class="face front">
           <div class="word">${esc(front(w))}</div>
           ${state.dir === "en-ru" ? `<div class="ipa">${esc(w.transcription)}</div>` : ""}
-          <div class="hint">Нажмите карточку, чтобы перевернуть</div>
+          <div class="hint">Нажмите, чтобы перевернуть</div>
         </div>
         <div class="face back">
           <div class="word">${esc(back(w))}</div>
@@ -182,7 +183,7 @@ function renderLearn() {
     </div>
     <div class="choices" id="choices"></div>
     <div class="feedback" id="feedback"></div>
-    <div class="card-nav"><span></span><button class="primary hidden" id="nextLearn" type="button">Дальше</button></div>
+    <div class="card-nav single"><span></span><button class="primary hidden" id="nextLearn" type="button">Дальше</button></div>
   `;
   const box = $("choices");
   q.options.forEach((opt, i) => {
@@ -252,7 +253,7 @@ function renderWrite() {
       <button class="primary" type="submit">Проверить</button>
     </form>
     <div class="feedback" id="feedback"></div>
-    <div class="card-nav"><span></span><button class="ghost hidden" id="nextWrite" type="button">Дальше</button></div>
+    <div class="card-nav single"><span></span><button class="ghost hidden" id="nextWrite" type="button">Дальше</button></div>
   `;
   const input = $("writeInput");
   input.focus();
@@ -297,7 +298,7 @@ function renderMatch() {
     <div class="session">Найдите пары · осталось ${m.left.filter((x) => !x.gone).length / 2}</div>
     <div class="match-grid" id="matchGrid"></div>
     <div class="feedback" id="feedback"></div>
-    <div class="card-nav"><span></span><button class="primary hidden" id="nextMatch" type="button">Новый раунд</button></div>
+    <div class="card-nav single"><span></span><button class="primary hidden" id="nextMatch" type="button">Новый раунд</button></div>
   `;
   const grid = $("matchGrid");
   m.left.forEach((item, i) => {
@@ -365,7 +366,10 @@ function renderList() {
     .map((w) => {
       const s = stats(w);
       return `<div class="list-row">
-        <div><b>${esc(w.word)}</b><div class="ipa" style="margin:0;font-size:13px">${esc(w.transcription)}</div></div>
+        <div class="list-word">
+          <b>${esc(w.word)}</b>
+          <div class="ipa list-ipa">${esc(w.transcription)}</div>
+        </div>
         <div class="list-forms">${w.past ? esc(w.past + " / " + w.participle) : ""}</div>
         <div class="list-trans">${esc(w.translation)}</div>
         <button class="star ${s.starred ? "on" : ""}" data-id="${esc(wordId(w))}" type="button">${s.starred ? "★" : "☆"}</button>
