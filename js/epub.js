@@ -190,7 +190,9 @@ export function renderChapter(book, index) {
     }
     [...el.attributes].forEach((a) => {
       const name = a.name.toLowerCase();
-      if (name.startsWith("on") || name === "srcset") el.removeAttribute(a.name);
+      if (name.startsWith("on") || name === "srcset" || name === "style" || name === "width" || name === "height" || name === "align") {
+        el.removeAttribute(a.name);
+      }
     });
     if (el.tagName === "A") {
       const span = document.createElement("span");

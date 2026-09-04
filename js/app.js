@@ -53,6 +53,7 @@ $("dirBtn").onclick = () => {
   $("dirBtn").classList.toggle("active", true);
   state.learn = null;
   state.write = null;
+  state.match = null;
   render();
 };
 
@@ -149,6 +150,19 @@ document.addEventListener("keydown", (e) => {
     if (e.key === "1") mark(false);
     if (e.key === "2") mark(true);
     if (e.key === "s") toggleStar();
+  }
+  if (state.mode === "learn") {
+    if (e.key >= "1" && e.key <= "4") {
+      const btn = document.querySelectorAll(".choice")[Number(e.key) - 1];
+      if (btn) btn.click();
+    }
+    if (e.key === "Enter") {
+      const next = $("nextLearn");
+      if (next && !next.classList.contains("hidden")) {
+        e.preventDefault();
+        next.click();
+      }
+    }
   }
   if (state.mode === "reader") {
     if (e.key === "ArrowRight") readerStep(1);

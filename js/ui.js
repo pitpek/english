@@ -134,34 +134,99 @@ function empty() {
   $("stage").innerHTML = `<div class="empty">Нет слов по выбранным фильтрам.</div>`;
 }
 
+function makeQuestion(card) {
+  const correct = back(card);
+  const pool = shuffle(state.filtered.filter((x) => x !== card)).slice(0, 3).map(back);
+  while (pool.length < 3 && state.all.length > 3) {
+    const extra = back(state.all[Math.floor(Math.random() * state.all.length)]);
+    if (extra !== correct && !pool.includes(extra)) pool.push(extra);
+  }
+  return {
+    card,
+    options: shuffle([correct, ...pool].slice(0, 4)),
+    correct,
+    answered: false,
+  };
+}
+
+function renderQuiz(q, sessionText, nextId, onNext) {
+  $("stage").innerHTML = `
+    <div class="quiz-layout">
+      <div class="quiz-top">
+        <div class="session">${sessionText}</div>
+        <div class="face prompt-card">
+          <div class="prompt">${esc(front(q.card))}</div>
+          ${state.dir === "en-ru" ? `<div class="ipa">${esc(q.card.transcription)}</div>` : ""}
+        </div>
+      </div>
+      <div class="quiz-dock">
+        <div class="choices" id="choices"></div>
+        <div class="feedback" id="feedback"></div>
+        <div class="card-nav single"><span></span><button class="primary hidden" id="${nextId}" type="button">Дальше</button></div>
+      </div>
+    </div>
+  `;
+  const box = $("choices");
+  q.options.forEach((opt, i) => {
+    const b = document.createElement("button");
+    b.className = "choice";
+    b.type = "button";
+    b.textContent = `${i + 1}. ${opt}`;
+    b.onclick = () => answerQuiz(q, opt, b, nextId);
+    box.appendChild(b);
+  });
+  $(nextId).onclick = onNext;
+}
+
+function answerQuiz(q, opt, btn, nextId) {
+  if (!q || q.answered) return;
+  q.answered = true;
+  const ok = opt === q.correct;
+  document.querySelectorAll(".choice").forEach((el) => {
+    const text = el.textContent.replace(/^\d+\.\s*/, "");
+    if (text === q.correct) el.classList.add("right");
+  });
+  if (!ok) btn.classList.add("wrong");
+  $("feedback").textContent = ok ? "Верно" : "Правильный ответ: " + q.correct;
+  $("feedback").style.color = ok ? "var(--ok)" : "var(--bad)";
+  $(nextId).classList.remove("hidden");
+  record(q.card, ok);
+}
+
 function renderCards() {
   const w = current();
   if (!w) return empty();
   const s = stats(w);
   $("stage").innerHTML = `
-    <div class="session">${state.index + 1} / ${state.deck.length} · ${esc(w.level)} · ${esc(w.category)}</div>
-    <div class="card-wrap">
-      <div class="flash ${state.flipped ? "flipped" : ""}" id="flash">
-        <div class="face front">
-          <div class="word">${esc(front(w))}</div>
-          ${state.dir === "en-ru" ? `<div class="ipa">${esc(w.transcription)}</div>` : ""}
-          <div class="hint">Нажмите, чтобы перевернуть</div>
-        </div>
-        <div class="face back">
-          <div class="word">${esc(back(w))}</div>
-          ${state.dir === "ru-en" ? `<div class="ipa">${esc(w.transcription)}</div>` : ""}
-          ${formsHtml(w)}
+    <div class="quiz-layout">
+      <div class="quiz-top">
+        <div class="session">${state.index + 1} / ${state.deck.length} · ${esc(w.level)} · ${esc(w.category)}</div>
+        <div class="card-wrap">
+          <div class="flash ${state.flipped ? "flipped" : ""}" id="flash">
+            <div class="face front">
+              <div class="word">${esc(front(w))}</div>
+              ${state.dir === "en-ru" ? `<div class="ipa">${esc(w.transcription)}</div>` : ""}
+              <div class="hint">Нажмите, чтобы перевернуть</div>
+            </div>
+            <div class="face back">
+              <div class="word">${esc(back(w))}</div>
+              ${state.dir === "ru-en" ? `<div class="ipa">${esc(w.transcription)}</div>` : ""}
+              ${formsHtml(w)}
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="card-nav">
-      <button class="ghost" id="prevBtn" type="button">← Назад</button>
-      <div class="know-btns">
-        <button class="ghost bad" id="noBtn" type="button">Не знаю</button>
-        <button class="star ${s.starred ? "on" : ""}" id="starBtn" type="button">${s.starred ? "★" : "☆"}</button>
-        <button class="ghost ok" id="yesBtn" type="button">Знаю</button>
+      <div class="quiz-dock">
+        <div class="card-nav">
+          <button class="ghost" id="prevBtn" type="button">← Назад</button>
+          <div class="know-btns">
+            <button class="ghost bad" id="noBtn" type="button">Не знаю</button>
+            <button class="star ${s.starred ? "on" : ""}" id="starBtn" type="button">${s.starred ? "★" : "☆"}</button>
+            <button class="ghost ok" id="yesBtn" type="button">Знаю</button>
+          </div>
+          <button class="ghost" id="nextBtn" type="button">Дальше →</button>
+        </div>
       </div>
-      <button class="ghost" id="nextBtn" type="button">Дальше →</button>
     </div>
   `;
   $("flash").onclick = flip;
@@ -176,29 +241,15 @@ function renderLearn() {
   if (!state.learn) startLearn();
   const q = state.learn;
   if (!q) return empty();
-  $("stage").innerHTML = `
-    <div class="session">Вопрос ${state.learnN} · ${esc(q.card.level)} · ${esc(q.card.category)}</div>
-    <div class="face prompt-card">
-      <div class="prompt">${esc(front(q.card))}</div>
-      ${state.dir === "en-ru" ? `<div class="ipa">${esc(q.card.transcription)}</div>` : ""}
-    </div>
-    <div class="choices" id="choices"></div>
-    <div class="feedback" id="feedback"></div>
-    <div class="card-nav single"><span></span><button class="primary hidden" id="nextLearn" type="button">Дальше</button></div>
-  `;
-  const box = $("choices");
-  q.options.forEach((opt, i) => {
-    const b = document.createElement("button");
-    b.className = "choice";
-    b.type = "button";
-    b.textContent = `${i + 1}. ${opt}`;
-    b.onclick = () => answerLearn(opt, b);
-    box.appendChild(b);
-  });
-  $("nextLearn").onclick = () => {
-    state.learn = null;
-    render();
-  };
+  renderQuiz(
+    q,
+    `Вопрос ${state.learnN} · ${esc(q.card.level)} · ${esc(q.card.category)}`,
+    "nextLearn",
+    () => {
+      state.learn = null;
+      render();
+    }
+  );
 }
 
 function startLearn() {
@@ -207,35 +258,8 @@ function startLearn() {
     state.learn = null;
     return;
   }
-  const correct = back(card);
-  const pool = shuffle(state.filtered.filter((x) => x !== card)).slice(0, 3).map(back);
-  while (pool.length < 3 && state.all.length > 3) {
-    const extra = back(state.all[Math.floor(Math.random() * state.all.length)]);
-    if (extra !== correct && !pool.includes(extra)) pool.push(extra);
-  }
   state.learnN = (state.learnN || 0) + 1;
-  state.learn = {
-    card,
-    options: shuffle([correct, ...pool].slice(0, 4)),
-    correct,
-    answered: false,
-  };
-}
-
-function answerLearn(opt, btn) {
-  const q = state.learn;
-  if (!q || q.answered) return;
-  q.answered = true;
-  const ok = opt === q.correct;
-  document.querySelectorAll(".choice").forEach((el) => {
-    const text = el.textContent.replace(/^\d+\.\s*/, "");
-    if (text === q.correct) el.classList.add("right");
-  });
-  if (!ok) btn.classList.add("wrong");
-  $("feedback").textContent = ok ? "Верно" : "Правильный ответ: " + q.correct;
-  $("feedback").style.color = ok ? "var(--ok)" : "var(--bad)";
-  $("nextLearn").classList.remove("hidden");
-  record(q.card, ok);
+  state.learn = makeQuestion(card);
 }
 
 function renderWrite() {
@@ -292,33 +316,49 @@ function answersMatch(value, w) {
 }
 
 function renderMatch() {
-  if (!state.match || !state.match.left.length) startMatch();
+  if (!state.match || !state.match.top) startMatch();
   const m = state.match;
   if (!m) return empty();
   $("stage").innerHTML = `
-    <div class="session">Найдите пары · осталось ${m.left.filter((x) => !x.gone).length / 2}</div>
-    <div class="match-grid" id="matchGrid"></div>
+    <div class="session">Найдите пары · осталось ${m.top.filter((x) => !x.gone).length}</div>
+    <div class="match-board">
+      <div class="match-group">
+        <div class="match-label">${esc(m.topLabel)}</div>
+        <div class="match-grid" id="matchTop"></div>
+      </div>
+      <div class="match-group">
+        <div class="match-label">${esc(m.bottomLabel)}</div>
+        <div class="match-grid" id="matchBottom"></div>
+      </div>
+    </div>
     <div class="feedback" id="feedback"></div>
     <div class="card-nav single"><span></span><button class="primary hidden" id="nextMatch" type="button">Новый раунд</button></div>
   `;
-  const grid = $("matchGrid");
-  m.left.forEach((item, i) => {
-    const b = document.createElement("button");
-    b.className = "match-item" + (item.gone ? " gone" : "") + (m.sel === i ? " selected" : "");
-    b.type = "button";
-    b.textContent = item.text;
-    b.onclick = () => tapMatch(i);
-    grid.appendChild(b);
-  });
+  fillMatchGrid("matchTop", "top");
+  fillMatchGrid("matchBottom", "bottom");
   $("nextMatch").onclick = () => {
     state.match = null;
     render();
   };
-  if (m.left.every((x) => x.gone)) {
+  if (m.top.every((x) => x.gone)) {
     $("feedback").textContent = "Все пары найдены";
     $("feedback").style.color = "var(--ok)";
     $("nextMatch").classList.remove("hidden");
   }
+}
+
+function fillMatchGrid(id, side) {
+  const m = state.match;
+  const grid = $(id);
+  m[side].forEach((item, i) => {
+    const selected = m.sel && m.sel.side === side && m.sel.i === i;
+    const b = document.createElement("button");
+    b.className = "match-item" + (item.gone ? " gone" : "") + (selected ? " selected" : "");
+    b.type = "button";
+    b.textContent = item.text;
+    b.onclick = () => tapMatch(side, i);
+    grid.appendChild(b);
+  });
 }
 
 function startMatch() {
@@ -328,29 +368,49 @@ function startMatch() {
     return;
   }
   const pairs = sample.map((card) => ({ id: wordId(card), card }));
-  const left = shuffle([
-    ...pairs.map((p) => ({ id: p.id, text: p.card.word, card: p.card, gone: false })),
-    ...pairs.map((p) => ({ id: p.id, text: p.card.translation, card: p.card, gone: false })),
-  ]);
-  state.match = { left, sel: null };
+  const enFirst = state.dir === "en-ru";
+  const top = shuffle(pairs.map((p) => ({
+    id: p.id,
+    text: enFirst ? p.card.word : p.card.translation,
+    card: p.card,
+    gone: false,
+  })));
+  const bottom = shuffle(pairs.map((p) => ({
+    id: p.id,
+    text: enFirst ? p.card.translation : p.card.word,
+    card: p.card,
+    gone: false,
+  })));
+  state.match = {
+    top,
+    bottom,
+    topLabel: enFirst ? "English" : "Русский",
+    bottomLabel: enFirst ? "Русский" : "English",
+    sel: null,
+  };
 }
 
-function tapMatch(i) {
+function tapMatch(side, i) {
   const m = state.match;
-  const item = m.left[i];
+  const item = m[side][i];
   if (item.gone) return;
   if (m.sel == null) {
-    m.sel = i;
+    m.sel = { side, i };
     renderMatch();
     return;
   }
-  if (m.sel === i) {
+  if (m.sel.side === side && m.sel.i === i) {
     m.sel = null;
     renderMatch();
     return;
   }
-  const a = m.left[m.sel];
-  const ok = a.id === item.id && a.text !== item.text;
+  if (m.sel.side === side) {
+    m.sel = { side, i };
+    renderMatch();
+    return;
+  }
+  const a = m[m.sel.side][m.sel.i];
+  const ok = a.id === item.id;
   if (ok) {
     a.gone = item.gone = true;
     record(item.card, true);
@@ -416,7 +476,7 @@ export function toggleStar() {
 
 export function render() {
   document.body.classList.toggle("mode-reader", state.mode === "reader");
-  document.body.classList.toggle("mode-reading", state.mode === "reader" && !!state.reader.book);
+  document.body.classList.toggle("mode-quiz", state.mode === "cards" || state.mode === "learn");
   if (state.mode === "cards") renderCards();
   else if (state.mode === "learn") renderLearn();
   else if (state.mode === "write") renderWrite();
