@@ -1,4 +1,4 @@
-const CACHE = "english-cards-v10";
+const CACHE = "english-cards-v11";
 const ASSETS = [
   "./index.html",
   "./data/words.json",

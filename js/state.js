@@ -25,6 +25,7 @@ export const state = {
     page: 0,
     pageCount: 1,
     fontSize: 20,
+    chapterHtml: "",
     blobs: [],
   },
   source: "",

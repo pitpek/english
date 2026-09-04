@@ -10,6 +10,7 @@ const MAX_FONT = 28;
 let stride = 0;
 let resizeObs = null;
 let lastBox = "";
+let lastLayoutKey = "";
 
 function bookUrl(file) {
   if (!file || file.includes("..")) throw new Error("Некорректный файл книги");
@@ -105,10 +106,10 @@ async function openBook(file) {
 }
 
 function applyTransform(animate) {
-  const page = $("readerPage");
-  if (!page) return;
-  page.style.transition = animate ? "transform .28s ease" : "none";
-  page.style.transform = `translate3d(${-state.reader.page * stride}px, 0, 0)`;
+  const track = $("readerTrack");
+  if (!track) return;
+  track.style.transition = animate ? "transform .28s ease" : "none";
+  track.style.transform = `translate3d(${-state.reader.page * stride}px, 0, 0)`;
 }
 
 function updatePager() {
@@ -123,24 +124,116 @@ function updatePager() {
   if (next) next.disabled = atEnd;
 }
 
+function fitFrame() {
+  const frame = $("readerFrame");
+  if (!frame) return { w: 0, h: 0 };
+  const nav = frame.parentElement.querySelector(".card-nav");
+  const navH = nav ? nav.offsetHeight + 12 : 56;
+  const top = frame.getBoundingClientRect().top;
+  const h = Math.max(180, Math.floor(window.innerHeight - top - navH));
+  frame.style.height = h + "px";
+  return { w: frame.clientWidth, h: frame.clientHeight };
+}
+
+function overflows(box) {
+  return box.scrollHeight > box.clientHeight + 1;
+}
+
+function paginateHtml(html, width, height, fontSize) {
+  const measure = document.createElement("div");
+  measure.className = "reader-sheet";
+  measure.style.cssText = [
+    "position:absolute", "left:-9999px", "top:0", "visibility:hidden",
+    `width:${width}px`, `height:${height}px`, `font-size:${fontSize}px`,
+  ].join(";");
+  document.body.appendChild(measure);
+
+  const source = document.createElement("div");
+  source.innerHTML = html;
+  const nodes = [...source.childNodes].filter((node) => {
+    if (node.nodeType === 1) return true;
+    return node.nodeType === 3 && node.textContent.trim();
+  });
+
+  const pages = [];
+  let current = document.createElement("div");
+  measure.appendChild(current);
+
+  const pushPage = () => {
+    const inner = current.innerHTML.trim();
+    if (inner) pages.push(inner);
+    current = document.createElement("div");
+    measure.replaceChildren(current);
+  };
+
+  const fillParagraph = (p) => {
+    const words = (p.textContent || "").split(/(\s+)/);
+    let dest = p.cloneNode(false);
+    current.appendChild(dest);
+    let ok = "";
+    for (const part of words) {
+      dest.textContent = ok + part;
+      if (overflows(measure) && ok.trim()) {
+        dest.textContent = ok;
+        pushPage();
+        dest = dest.cloneNode(false);
+        current.appendChild(dest);
+        ok = part;
+        dest.textContent = ok;
+      } else {
+        ok += part;
+      }
+    }
+  };
+
+  for (const node of nodes) {
+    const clone = node.cloneNode(true);
+    current.appendChild(clone);
+    if (!overflows(measure)) continue;
+    current.removeChild(clone);
+    if (current.childNodes.length) pushPage();
+    current.appendChild(clone);
+    if (!overflows(measure)) continue;
+    current.removeChild(clone);
+    if (clone.nodeName === "P") fillParagraph(clone);
+    else {
+      current.appendChild(clone);
+      pushPage();
+    }
+  }
+  if (current.innerHTML.trim()) pages.push(current.innerHTML.trim());
+  measure.remove();
+  return pages.length ? pages : ["<p></p>"];
+}
+
+function fillTrack(pages, width, height, fontSize) {
+  const track = $("readerTrack");
+  if (!track) return;
+  stride = width;
+  track.style.height = height + "px";
+  track.innerHTML = pages.map((html) => (
+    `<div class="reader-sheet" style="width:${width}px;height:${height}px;font-size:${fontSize}px">${html}</div>`
+  )).join("");
+}
+
 function layoutPages(restore) {
   const r = state.reader;
   const frame = $("readerFrame");
-  const page = $("readerPage");
-  if (!frame || !page || !r.book) return;
-  const w = frame.clientWidth;
-  const h = frame.clientHeight;
+  const track = $("readerTrack");
+  if (!frame || !track || !r.book || !r.chapterHtml) return;
+  const { w, h } = fitFrame();
   if (w < 40 || h < 40) return;
-  const gap = parseFloat(getComputedStyle(page).columnGap) || 28;
-  page.style.width = w + "px";
-  page.style.columnWidth = w + "px";
-  stride = w + gap;
-  const count = Math.max(1, Math.round((page.scrollWidth + gap) / stride));
-  r.pageCount = count;
+  const key = `${w}x${h}x${r.fontSize}x${r.chapter}`;
   const used = restore !== undefined ? restore : 0;
-  if (used === "end") r.page = count - 1;
-  else if (typeof used === "number") r.page = Math.round(used * Math.max(0, count - 1));
-  r.page = Math.min(Math.max(0, r.page || 0), count - 1);
+  if (key !== lastLayoutKey) {
+    lastLayoutKey = key;
+    const pages = paginateHtml(r.chapterHtml, w, h, r.fontSize);
+    fillTrack(pages, w, h, r.fontSize);
+    r.pageCount = pages.length;
+  }
+  if (used === "end") r.page = r.pageCount - 1;
+  else if (typeof used === "number") r.page = Math.round(used * Math.max(0, r.pageCount - 1));
+  r.page = Math.min(Math.max(0, r.page || 0), r.pageCount - 1);
   r.restore = undefined;
   applyTransform(false);
   updatePager();
@@ -187,14 +280,8 @@ function setChapter(next) {
 function changeFont(delta) {
   const r = state.reader;
   r.fontSize = Math.min(MAX_FONT, Math.max(MIN_FONT, r.fontSize + delta));
-  const page = $("readerPage");
-  if (!page) {
-    savePos();
-    renderReader();
-    return;
-  }
   const progress = r.pageCount > 1 ? r.page / (r.pageCount - 1) : 0;
-  page.style.fontSize = r.fontSize + "px";
+  lastLayoutKey = "";
   requestAnimationFrame(() => layoutPages(progress));
 }
 
@@ -228,10 +315,10 @@ function bindSwipe() {
     if (axis !== "x") return;
     e.preventDefault();
     dx = mx;
-    const page = $("readerPage");
-    if (!page) return;
-    page.style.transition = "none";
-    page.style.transform = `translate3d(${-state.reader.page * stride + dx}px, 0, 0)`;
+    const track = $("readerTrack");
+    if (!track) return;
+    track.style.transition = "none";
+    track.style.transform = `translate3d(${-state.reader.page * stride + dx}px, 0, 0)`;
   };
   const end = (e) => {
     if (pid == null || (e && e.pointerId !== pid)) return;
@@ -315,6 +402,7 @@ export function readerStep(delta) {
 export function renderReader() {
   const r = state.reader;
   document.body.classList.toggle("mode-reader", true);
+  document.body.classList.toggle("mode-reading", !!r.book);
   if (r.catalog == null) {
     $("stage").innerHTML = `<div class="empty">Загрузка списка книг…</div>`;
     if (!r.loading) void loadCatalog();
@@ -348,6 +436,8 @@ export function renderReader() {
   revokeBlobs();
   const page = renderChapter(r.book, r.chapter);
   r.blobs = page.blobs;
+  r.chapterHtml = page.html;
+  lastLayoutKey = "";
   if (page.title && !r.book.chapters[r.chapter].title) {
     r.book.chapters[r.chapter].title = page.title;
   }
@@ -369,7 +459,7 @@ export function renderReader() {
         · <span id="readerPager">1 / 1</span>
       </div>
       <div class="reader-frame" id="readerFrame">
-        <article class="reader-page" id="readerPage" style="font-size:${r.fontSize}px">${page.html}</article>
+        <div class="reader-track" id="readerTrack"></div>
       </div>
       <div class="card-nav">
         <button class="ghost" id="readerPrev" type="button">←</button>

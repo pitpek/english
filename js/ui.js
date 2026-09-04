@@ -416,6 +416,7 @@ export function toggleStar() {
 
 export function render() {
   document.body.classList.toggle("mode-reader", state.mode === "reader");
+  document.body.classList.toggle("mode-reading", state.mode === "reader" && !!state.reader.book);
   if (state.mode === "cards") renderCards();
   else if (state.mode === "learn") renderLearn();
   else if (state.mode === "write") renderWrite();
