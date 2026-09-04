@@ -195,6 +195,36 @@
     .file-btn { position: relative; overflow: hidden; }
     .file-btn input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
     .filters-done { display: none; }
+    body.mode-reader .tools { display: none; }
+    button:disabled { opacity: .4; cursor: default; }
+    .book-list { display: grid; gap: 8px; }
+    .book-item {
+      display: flex; flex-direction: column; gap: 4px; text-align: left;
+      padding: 14px 16px; border-radius: 14px;
+      background: var(--panel); border: 1px solid var(--line); color: var(--text);
+    }
+    .book-item span { color: var(--muted); font-size: 13px; }
+    .reader-bar {
+      display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+      margin-bottom: 10px;
+    }
+    .reader-bar select {
+      flex: 1 1 160px; min-width: 0; min-height: 40px;
+      background: var(--panel); color: var(--text);
+      border: 1px solid var(--line); border-radius: 12px; padding: 8px 10px;
+    }
+    .reader-meta { color: var(--muted); font-size: 13px; margin-bottom: 8px; }
+    .reader-page {
+      font-family: Georgia, "Iowan Old Style", "Times New Roman", serif;
+      line-height: 1.7; max-width: 42rem; margin: 0 auto;
+      overflow-wrap: anywhere;
+    }
+    .reader-page p { margin: 0 0 .9em; }
+    .reader-page h1, .reader-page h2, .reader-page h3 {
+      line-height: 1.25; margin: 1.1em 0 .55em;
+    }
+    .reader-page img { max-width: 100%; height: auto; border-radius: 8px; }
+    .reader-page table { display: block; max-width: 100%; overflow-x: auto; }
     .modal {
       position: fixed; inset: 0; z-index: 40;
       background: rgba(0,0,0,.55); display: flex;

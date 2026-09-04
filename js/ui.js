@@ -11,6 +11,7 @@ import {
   current,
   pickCard,
 } from "./state.js";
+import { renderReader } from "./reader.js";
 
 export function updateProgress() {
   const total = state.all.length || 1;
@@ -414,10 +415,12 @@ export function toggleStar() {
 }
 
 export function render() {
+  document.body.classList.toggle("mode-reader", state.mode === "reader");
   if (state.mode === "cards") renderCards();
   else if (state.mode === "learn") renderLearn();
   else if (state.mode === "write") renderWrite();
   else if (state.mode === "match") renderMatch();
+  else if (state.mode === "reader") renderReader();
   else renderList();
 }
 

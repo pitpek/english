@@ -16,6 +16,7 @@ import {
   closeInstallModal,
   showInstallHelp,
 } from "./ui.js";
+import { readerStep } from "./reader.js";
 
 setOnProgressChange(updateProgress);
 
@@ -137,7 +138,7 @@ document.addEventListener("keydown", (e) => {
     setFiltersOpen(false);
     closeInstallModal();
   }
-  if (e.target.matches("input, textarea")) return;
+  if (e.target.matches("input, textarea, select")) return;
   if (state.mode === "cards") {
     if (e.code === "Space") {
       e.preventDefault();
@@ -148,6 +149,10 @@ document.addEventListener("keydown", (e) => {
     if (e.key === "1") mark(false);
     if (e.key === "2") mark(true);
     if (e.key === "s") toggleStar();
+  }
+  if (state.mode === "reader") {
+    if (e.key === "ArrowRight") readerStep(1);
+    if (e.key === "ArrowLeft") readerStep(-1);
   }
   if (e.key === "p") {
     const w = current() || (state.learn && state.learn.card);
