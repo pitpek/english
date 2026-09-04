@@ -3,9 +3,13 @@ import { state } from "./state.js";
 import { parseEpub, renderChapter } from "./epub.js";
 
 const INDEX_URL = new URL("../books/index.json", import.meta.url).href;
-const POS_KEY = "english-reader-pos-v1";
+const POS_KEY = "english-reader-pos-v2";
 const MIN_FONT = 16;
 const MAX_FONT = 28;
+
+let stride = 0;
+let resizeObs = null;
+let lastBox = "";
 
 function bookUrl(file) {
   if (!file || file.includes("..")) throw new Error("Некорректный файл книги");
@@ -14,20 +18,30 @@ function bookUrl(file) {
 
 function loadPos() {
   try {
-    return JSON.parse(localStorage.getItem(POS_KEY) || "{}");
-  } catch {
-    return {};
-  }
+    const raw = JSON.parse(localStorage.getItem(POS_KEY) || localStorage.getItem("english-reader-pos-v1") || "{}");
+    if (raw.books) return raw;
+    if (raw.file) {
+      return {
+        fontSize: raw.fontSize || 20,
+        books: { [raw.file]: { chapter: raw.chapter || 0, progress: 0 } },
+      };
+    }
+  } catch { /* ignore */ }
+  return { fontSize: 20, books: {} };
 }
 
 function savePos() {
   const r = state.reader;
-  if (!r.book) return;
-  localStorage.setItem(POS_KEY, JSON.stringify({
-    file: r.file,
+  if (!r.book || !r.file) return;
+  const all = loadPos();
+  const pages = Math.max(1, r.pageCount || 1);
+  all.fontSize = r.fontSize;
+  all.books = all.books || {};
+  all.books[r.file] = {
     chapter: r.chapter,
-    fontSize: r.fontSize,
-  }));
+    progress: pages <= 1 ? 0 : r.page / (pages - 1),
+  };
+  localStorage.setItem(POS_KEY, JSON.stringify(all));
 }
 
 function revokeBlobs() {
@@ -73,11 +87,14 @@ async function openBook(file) {
     if (!res.ok) throw new Error("Книга не найдена");
     const book = await parseEpub(await res.arrayBuffer());
     const pos = loadPos();
+    const saved = pos.books && pos.books[file];
     r.file = file;
     r.book = book;
-    r.chapter = pos.file === file && Number.isInteger(pos.chapter)
-      ? Math.min(Math.max(0, pos.chapter), book.chapters.length - 1)
+    r.chapter = saved && Number.isInteger(saved.chapter)
+      ? Math.min(Math.max(0, saved.chapter), book.chapters.length - 1)
       : 0;
+    r.page = 0;
+    r.restore = saved && typeof saved.progress === "number" ? saved.progress : 0;
     if (pos.fontSize) r.fontSize = Math.min(MAX_FONT, Math.max(MIN_FONT, pos.fontSize));
     savePos();
   } catch (err) {
@@ -87,13 +104,174 @@ async function openBook(file) {
   if (state.mode === "reader") renderReader();
 }
 
+function applyTransform(animate) {
+  const page = $("readerPage");
+  if (!page) return;
+  page.style.transition = animate ? "transform .28s ease" : "none";
+  page.style.transform = `translate3d(${-state.reader.page * stride}px, 0, 0)`;
+}
+
+function updatePager() {
+  const r = state.reader;
+  const el = $("readerPager");
+  if (el) el.textContent = `${(r.page || 0) + 1} / ${r.pageCount || 1}`;
+  const atStart = r.chapter === 0 && r.page === 0;
+  const atEnd = r.book && r.chapter >= r.book.chapters.length - 1 && r.page >= (r.pageCount || 1) - 1;
+  const prev = $("readerPrev");
+  const next = $("readerNext");
+  if (prev) prev.disabled = atStart;
+  if (next) next.disabled = atEnd;
+}
+
+function layoutPages(restore) {
+  const r = state.reader;
+  const frame = $("readerFrame");
+  const page = $("readerPage");
+  if (!frame || !page || !r.book) return;
+  const w = frame.clientWidth;
+  const h = frame.clientHeight;
+  if (w < 40 || h < 40) return;
+  const gap = parseFloat(getComputedStyle(page).columnGap) || 28;
+  page.style.width = w + "px";
+  page.style.columnWidth = w + "px";
+  stride = w + gap;
+  const count = Math.max(1, Math.round((page.scrollWidth + gap) / stride));
+  r.pageCount = count;
+  const used = restore !== undefined ? restore : 0;
+  if (used === "end") r.page = count - 1;
+  else if (typeof used === "number") r.page = Math.round(used * Math.max(0, count - 1));
+  r.page = Math.min(Math.max(0, r.page || 0), count - 1);
+  r.restore = undefined;
+  applyTransform(false);
+  updatePager();
+  savePos();
+}
+
+function go(delta) {
+  const r = state.reader;
+  if (!r.book) return;
+  const next = (r.page || 0) + delta;
+  if (next >= 0 && next < (r.pageCount || 1)) {
+    r.page = next;
+    applyTransform(true);
+    updatePager();
+    savePos();
+    return;
+  }
+  if (delta > 0 && r.chapter < r.book.chapters.length - 1) {
+    r.chapter += 1;
+    r.page = 0;
+    r.restore = 0;
+    renderReader();
+    return;
+  }
+  if (delta < 0 && r.chapter > 0) {
+    r.chapter -= 1;
+    r.restore = "end";
+    renderReader();
+    return;
+  }
+  applyTransform(true);
+}
+
 function setChapter(next) {
   const r = state.reader;
   if (!r.book) return;
   r.chapter = Math.min(Math.max(0, next), r.book.chapters.length - 1);
+  r.page = 0;
+  r.restore = 0;
   savePos();
   renderReader();
-  $("readerPage")?.scrollIntoView({ block: "start" });
+}
+
+function changeFont(delta) {
+  const r = state.reader;
+  r.fontSize = Math.min(MAX_FONT, Math.max(MIN_FONT, r.fontSize + delta));
+  const page = $("readerPage");
+  if (!page) {
+    savePos();
+    renderReader();
+    return;
+  }
+  const progress = r.pageCount > 1 ? r.page / (r.pageCount - 1) : 0;
+  page.style.fontSize = r.fontSize + "px";
+  requestAnimationFrame(() => layoutPages(progress));
+}
+
+function bindSwipe() {
+  const frame = $("readerFrame");
+  if (!frame) return;
+  let pid = null;
+  let x0 = 0;
+  let y0 = 0;
+  let dx = 0;
+  let axis = null;
+
+  frame.onpointerdown = (e) => {
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    if (e.target.closest("button, select")) return;
+    pid = e.pointerId;
+    x0 = e.clientX;
+    y0 = e.clientY;
+    dx = 0;
+    axis = null;
+    try { frame.setPointerCapture(pid); } catch { /* ignore */ }
+  };
+  frame.onpointermove = (e) => {
+    if (pid == null || e.pointerId !== pid) return;
+    const mx = e.clientX - x0;
+    const my = e.clientY - y0;
+    if (!axis) {
+      if (Math.abs(mx) < 10 && Math.abs(my) < 10) return;
+      axis = Math.abs(mx) > Math.abs(my) ? "x" : "y";
+    }
+    if (axis !== "x") return;
+    e.preventDefault();
+    dx = mx;
+    const page = $("readerPage");
+    if (!page) return;
+    page.style.transition = "none";
+    page.style.transform = `translate3d(${-state.reader.page * stride + dx}px, 0, 0)`;
+  };
+  const end = (e) => {
+    if (pid == null || (e && e.pointerId !== pid)) return;
+    pid = null;
+    if (axis === "x") {
+      if (dx < -45) go(1);
+      else if (dx > 45) go(-1);
+      else applyTransform(true);
+    } else if (axis == null && e && e.type === "pointerup") {
+      const rect = frame.getBoundingClientRect();
+      const rel = (e.clientX - rect.left) / rect.width;
+      if (rel < 0.28) go(-1);
+      else if (rel > 0.72) go(1);
+    }
+    axis = null;
+    dx = 0;
+  };
+  frame.onpointerup = end;
+  frame.onpointercancel = end;
+}
+
+function watchFrame() {
+  if (resizeObs) {
+    resizeObs.disconnect();
+    resizeObs = null;
+  }
+  const frame = $("readerFrame");
+  if (!frame || typeof ResizeObserver !== "function") return;
+  lastBox = "";
+  resizeObs = new ResizeObserver(() => {
+    const box = frame.clientWidth + "x" + frame.clientHeight;
+    if (box === lastBox) return;
+    lastBox = box;
+    const r = state.reader;
+    const hint = r.restore !== undefined
+      ? r.restore
+      : (r.pageCount > 1 ? r.page / (r.pageCount - 1) : 0);
+    layoutPages(hint);
+  });
+  resizeObs.observe(frame);
 }
 
 function bindReader() {
@@ -101,6 +279,8 @@ function bindReader() {
   const back = $("readerBack");
   if (back) {
     back.onclick = () => {
+      savePos();
+      if (resizeObs) resizeObs.disconnect();
       revokeBlobs();
       r.book = null;
       r.file = "";
@@ -114,34 +294,22 @@ function bindReader() {
     });
   }
   const select = $("readerChapters");
-  if (select) {
-    select.onchange = () => setChapter(Number(select.value));
-  }
+  if (select) select.onchange = () => setChapter(Number(select.value));
   const minus = $("readerMinus");
   const plus = $("readerPlus");
-  if (minus) {
-    minus.onclick = () => {
-      r.fontSize = Math.max(MIN_FONT, r.fontSize - 2);
-      savePos();
-      renderReader();
-    };
-  }
-  if (plus) {
-    plus.onclick = () => {
-      r.fontSize = Math.min(MAX_FONT, r.fontSize + 2);
-      savePos();
-      renderReader();
-    };
-  }
+  if (minus) minus.onclick = () => changeFont(-2);
+  if (plus) plus.onclick = () => changeFont(2);
   const prev = $("readerPrev");
   const next = $("readerNext");
-  if (prev) prev.onclick = () => setChapter(r.chapter - 1);
-  if (next) next.onclick = () => setChapter(r.chapter + 1);
+  if (prev) prev.onclick = () => go(-1);
+  if (next) next.onclick = () => go(1);
+  bindSwipe();
+  watchFrame();
 }
 
 export function readerStep(delta) {
   if (state.mode !== "reader" || !state.reader.book) return;
-  setChapter(state.reader.chapter + delta);
+  go(delta);
 }
 
 export function renderReader() {
@@ -157,6 +325,7 @@ export function renderReader() {
     return;
   }
   if (!r.book) {
+    if (resizeObs) resizeObs.disconnect();
     const rows = r.catalog.map((book) => `
       <button class="book-item" type="button" data-file="${esc(book.file)}">
         <b>${esc(book.title || book.file.replace(/\.epub$/i, ""))}</b>
@@ -195,13 +364,19 @@ export function renderReader() {
         <button class="ghost" id="readerMinus" type="button">A−</button>
         <button class="ghost" id="readerPlus" type="button">A+</button>
       </div>
-      <div class="reader-meta">${esc(r.book.title)}${r.book.author ? " · " + esc(r.book.author) : ""}</div>
-      <article class="reader-page" id="readerPage" style="font-size:${r.fontSize}px">${page.html}</article>
+      <div class="reader-meta">
+        ${esc(r.book.title)}${r.book.author ? " · " + esc(r.book.author) : ""}
+        · <span id="readerPager">1 / 1</span>
+      </div>
+      <div class="reader-frame" id="readerFrame">
+        <article class="reader-page" id="readerPage" style="font-size:${r.fontSize}px">${page.html}</article>
+      </div>
       <div class="card-nav">
-        <button class="ghost" id="readerPrev" type="button" ${r.chapter === 0 ? "disabled" : ""}>← Глава</button>
-        <button class="ghost" id="readerNext" type="button" ${r.chapter >= r.book.chapters.length - 1 ? "disabled" : ""}>Глава →</button>
+        <button class="ghost" id="readerPrev" type="button">←</button>
+        <button class="ghost" id="readerNext" type="button">→</button>
       </div>
     </div>
   `;
   bindReader();
+  requestAnimationFrame(() => layoutPages(r.restore));
 }

@@ -214,17 +214,34 @@
       border: 1px solid var(--line); border-radius: 12px; padding: 8px 10px;
     }
     .reader-meta { color: var(--muted); font-size: 13px; margin-bottom: 8px; }
+    .reader {
+      display: flex; flex-direction: column; min-height: 0; height: 100%;
+    }
+    .reader-frame {
+      --page-gap: 28px;
+      position: relative; flex: 1; min-height: 360px;
+      overflow: hidden; touch-action: none;
+      border: 1px solid var(--line); border-radius: 16px;
+      background: #171d27;
+    }
     .reader-page {
       font-family: Georgia, "Iowan Old Style", "Times New Roman", serif;
-      line-height: 1.7; max-width: 42rem; margin: 0 auto;
-      overflow-wrap: anywhere;
+      line-height: 1.7; height: 100%; width: 100%;
+      box-sizing: border-box; padding: 18px 20px;
+      overflow-wrap: anywhere; user-select: none;
+      column-fill: auto; column-gap: var(--page-gap);
+      will-change: transform;
     }
     .reader-page p { margin: 0 0 .9em; }
     .reader-page h1, .reader-page h2, .reader-page h3 {
-      line-height: 1.25; margin: 1.1em 0 .55em;
+      line-height: 1.25; margin: 0 0 .55em; break-inside: avoid;
     }
-    .reader-page img { max-width: 100%; height: auto; border-radius: 8px; }
+    .reader-page img {
+      max-width: 100%; height: auto; border-radius: 8px; break-inside: avoid;
+    }
     .reader-page table { display: block; max-width: 100%; overflow-x: auto; }
+    body.mode-reader .main { display: flex; flex-direction: column; min-height: calc(100dvh - 24px); }
+    body.mode-reader .stage { flex: 1; display: flex; min-height: 0; max-width: none; }
     .modal {
       position: fixed; inset: 0; z-index: 40;
       background: rgba(0,0,0,.55); display: flex;
@@ -245,7 +262,7 @@
     }
     @media (max-width: 900px) {
       html, body, .app { min-height: 100dvh; }
-      .app { grid-template-columns: 1fr; }
+      .app { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
       .mobile-head {
         display: flex; align-items: center; justify-content: space-between;
         gap: 10px; position: sticky; top: 0; z-index: 20;
@@ -284,8 +301,8 @@
       .sidebar.open { transform: none; }
       .sidebar .brand, .sidebar #meta { display: none; }
       .main {
-        padding: 10px 10px 24px; min-width: 0; overflow-x: hidden;
-        display: flex; flex-direction: column;
+        padding: 10px 10px 16px; min-width: 0; overflow-x: hidden;
+        display: flex; flex-direction: column; min-height: 0;
       }
       .top { margin-bottom: 10px; gap: 8px; flex-shrink: 0; }
       .modes {
@@ -395,6 +412,10 @@
       label.check { padding: 10px 8px; min-height: 44px; }
       label.check input { width: 18px; height: 18px; }
       .filters-done { display: block; width: 100%; min-height: 48px; }
+      body.mode-reader .main { min-height: 0; }
+      body.mode-reader .stage { flex: 1; display: flex; min-height: 0; }
+      .reader-frame { min-height: 0; border-radius: 12px; }
+      .reader-page { padding: 14px 16px; }
       body.filters-open { overflow: hidden; }
     }
     @media (max-width: 480px) {

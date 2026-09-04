@@ -22,6 +22,8 @@ export const state = {
     file: "",
     book: null,
     chapter: 0,
+    page: 0,
+    pageCount: 1,
     fontSize: 20,
     blobs: [],
   },
