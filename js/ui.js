@@ -265,8 +265,9 @@ function startLearn() {
 function renderWrite() {
   const card = state.write && state.write.card ? state.write.card : pickCard();
   if (!card) return empty();
-  state.write = state.write && state.write.card ? state.write : { card, answered: false };
+  state.write = state.write && state.write.card ? state.write : { card, answered: false, revealed: false };
   const w = state.write.card;
+  const session = state.write;
   $("stage").innerHTML = `
     <div class="session">${esc(w.level)} · ${esc(w.category)}</div>
     <div class="face prompt-card">
@@ -274,13 +275,23 @@ function renderWrite() {
       ${state.dir === "en-ru" ? `<div class="ipa">${esc(w.transcription)}</div>` : ""}
     </div>
     <form class="write-box" id="writeForm">
-      <input id="writeInput" autocomplete="off" placeholder="Введите перевод" />
+      <input id="writeInput" autocomplete="off" placeholder="${session.revealed ? "Впишите правильный ответ" : "Введите перевод"}" />
       <button class="primary" type="submit">Проверить</button>
     </form>
     <div class="feedback" id="feedback"></div>
     <div class="card-nav single"><span></span><button class="ghost hidden" id="nextWrite" type="button">Дальше</button></div>
   `;
   const input = $("writeInput");
+  const fb = $("feedback");
+  if (session.revealed && !session.answered) {
+    fb.style.color = "var(--bad)";
+    fb.innerHTML = `Неверно. Правильный ответ: <b>${esc(back(w))}</b>. Впишите его, чтобы продолжить.`;
+  }
+  if (session.answered) {
+    fb.style.color = "var(--ok)";
+    fb.textContent = "Верно";
+    $("nextWrite").classList.remove("hidden");
+  }
   input.focus();
   $("writeForm").onsubmit = (e) => {
     e.preventDefault();
@@ -302,12 +313,41 @@ function checkWrite(value) {
   const w = state.write.card;
   const expected = back(w);
   const ok = answersMatch(value, w);
-  state.write.answered = true;
   const fb = $("feedback");
-  fb.style.color = ok ? "var(--ok)" : "var(--bad)";
-  fb.innerHTML = ok ? "Верно" : `Ответ: <b>${esc(expected)}</b>`;
-  $("nextWrite").classList.remove("hidden");
-  record(w, ok);
+  const input = $("writeInput");
+
+  if (state.write.revealed) {
+    if (!ok) {
+      fb.style.color = "var(--bad)";
+      fb.innerHTML = `Ещё раз. Правильный ответ: <b>${esc(expected)}</b>`;
+      input.value = "";
+      input.focus();
+      return;
+    }
+    state.write.answered = true;
+    fb.style.color = "var(--ok)";
+    fb.textContent = "Верно";
+    $("nextWrite").classList.remove("hidden");
+    input.blur();
+    return;
+  }
+
+  if (ok) {
+    state.write.answered = true;
+    fb.style.color = "var(--ok)";
+    fb.textContent = "Верно";
+    $("nextWrite").classList.remove("hidden");
+    record(w, true);
+    return;
+  }
+
+  state.write.revealed = true;
+  fb.style.color = "var(--bad)";
+  fb.innerHTML = `Неверно. Правильный ответ: <b>${esc(expected)}</b>. Впишите его, чтобы продолжить.`;
+  input.value = "";
+  input.placeholder = "Впишите правильный ответ";
+  input.focus();
+  record(w, false);
 }
 
 function answersMatch(value, w) {

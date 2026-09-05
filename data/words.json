@@ -3031,6 +3031,1776 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Уровень 4",
+      "categories": [
+        {
+          "name": "Предлоги",
+          "words": [
+            {
+              "word": "at",
+              "transcription": "[æt]",
+              "translation": "в (время в часах и минутах), на, у, около (чего-либо)"
+            },
+            {
+              "word": "on",
+              "transcription": "[ɒn]",
+              "translation": "в (время в днях и датах), на (чем-либо)"
+            },
+            {
+              "word": "in",
+              "transcription": "[ɪn]",
+              "translation": "в (месяцы, годы), через (время), внутри (чего-либо)"
+            },
+            {
+              "word": "since",
+              "transcription": "[sɪns]",
+              "translation": "с, с тех пор, так как, как"
+            },
+            {
+              "word": "from…to",
+              "transcription": "[frɒm tuː]",
+              "translation": "с…до… (время)"
+            },
+            {
+              "word": "from",
+              "transcription": "[frɒm]",
+              "translation": "от (кого?, чего?), из, с, от (чего либо)"
+            },
+            {
+              "word": "before",
+              "transcription": "[bɪˈfɔː]",
+              "translation": "до, перед, перед тем, прежде чем"
+            },
+            {
+              "word": "until",
+              "transcription": "[ənˈtɪl]",
+              "translation": "до, до тех пор"
+            },
+            {
+              "word": "till",
+              "transcription": "[tɪl]",
+              "translation": "до, до тех пор"
+            },
+            {
+              "word": "by",
+              "transcription": "[baɪ]",
+              "translation": "к (время), у, рядом, возле, около"
+            },
+            {
+              "word": "after",
+              "transcription": "[ˈæftər]",
+              "translation": "после, после того как"
+            },
+            {
+              "word": "about",
+              "transcription": "[əˈbaut]",
+              "translation": "около (время), около, вокруг (чего либо)"
+            },
+            {
+              "word": "between",
+              "transcription": "[bɪˈtwiːn]",
+              "translation": "между"
+            },
+            {
+              "word": "during",
+              "transcription": "[ˈdurɪŋ]",
+              "translation": "в течение (события которого происходило действие)"
+            },
+            {
+              "word": "over",
+              "transcription": "[ˈəuvər]",
+              "translation": "за, в течение (время), над (чем либо)"
+            },
+            {
+              "word": "within",
+              "transcription": "[wɪˈðɪn]",
+              "translation": "в пределах, в течение, внутри (месяца/недели и т. д.)"
+            },
+            {
+              "word": "for",
+              "transcription": "[fɔːr]",
+              "translation": "в течение (времени), для, в, на (куда)"
+            },
+            {
+              "word": "up",
+              "transcription": "[ʌp]",
+              "translation": "вверх"
+            },
+            {
+              "word": "down",
+              "transcription": "[daun]",
+              "translation": "вниз"
+            },
+            {
+              "word": "into",
+              "transcription": "[ˈɪntuː]",
+              "translation": "в (внутрь)"
+            },
+            {
+              "word": "to",
+              "transcription": "[tuː]",
+              "translation": "в, на, к (куда?)"
+            },
+            {
+              "word": "out of",
+              "transcription": "[aut ɒv]",
+              "translation": "из"
+            },
+            {
+              "word": "onto",
+              "transcription": "[ˈɒntə]",
+              "translation": "на, в"
+            },
+            {
+              "word": "towards",
+              "transcription": "[təˈwɔːdz]",
+              "translation": "по направлению к, навстречу, в направлении"
+            },
+            {
+              "word": "through",
+              "transcription": "[θruː]",
+              "translation": "сквозь, через (что-то), посредством чего либо"
+            },
+            {
+              "word": "via",
+              "transcription": "[ˈvaɪə]",
+              "translation": "через, посредством чего либо"
+            },
+            {
+              "word": "across",
+              "transcription": "[əˈkrɔːs]",
+              "translation": "через (плоскость напр. дорогу)"
+            },
+            {
+              "word": "opposite",
+              "transcription": "[ˈɒpəzɪt]",
+              "translation": "напротив, противоположный, обратный"
+            },
+            {
+              "word": "along",
+              "transcription": "[əˈlɒŋ]",
+              "translation": "вдоль, по"
+            },
+            {
+              "word": "past",
+              "transcription": "[pɑːst]",
+              "translation": "мимо, прошлое, прошедшее, прошлый, прошедший"
+            },
+            {
+              "word": "near",
+              "transcription": "[nɪə]",
+              "translation": "около, близ, у, рядом, близкий"
+            },
+            {
+              "word": "nearby",
+              "transcription": "[ˌnɪəˈbaɪ]",
+              "translation": "около, близ, у"
+            },
+            {
+              "word": "beside",
+              "transcription": "[bɪˈsaɪd]",
+              "translation": "рядом"
+            },
+            {
+              "word": "next to",
+              "transcription": "[nekst tuː]",
+              "translation": "рядом, около, возле"
+            },
+            {
+              "word": "round",
+              "transcription": "[raund]",
+              "translation": "за, вокруг, раунд, тур, кругом, круглый, округлять"
+            },
+            {
+              "word": "around",
+              "transcription": "[əˈraund]",
+              "translation": "за, вокруг"
+            },
+            {
+              "word": "in front of",
+              "transcription": "[ɪn frʌnt ɒv]",
+              "translation": "перед, напротив, спереди"
+            },
+            {
+              "word": "behind",
+              "transcription": "[bɪˈhaɪnd]",
+              "translation": "за, позади, сзади, после"
+            },
+            {
+              "word": "above",
+              "transcription": "[əˈbʌv]",
+              "translation": "над, выше, сверху"
+            },
+            {
+              "word": "under",
+              "transcription": "[ˈʌndə]",
+              "translation": "под (чем-то), меньше чем (о возрасте или о количестве)"
+            },
+            {
+              "word": "below",
+              "transcription": "[bɪˈləu]",
+              "translation": "под, ниже (чего-то), ниже (температура, высота, балл)"
+            },
+            {
+              "word": "among",
+              "transcription": "[əˈmʌŋ]",
+              "translation": "среди"
+            },
+            {
+              "word": "outside",
+              "transcription": "[ˌautˈsaɪd]",
+              "translation": "снаружи, вне"
+            },
+            {
+              "word": "of",
+              "transcription": "[ɒv]",
+              "translation": "из (материала), о (о ком?, о чем?)"
+            },
+            {
+              "word": "with",
+              "transcription": "[wɪð]",
+              "translation": "с/со, вместе с/со (с кем?, с чем?)"
+            },
+            {
+              "word": "without",
+              "transcription": "[wɪˈðaut]",
+              "translation": "без"
+            },
+            {
+              "word": "per",
+              "transcription": "[pɜː]",
+              "translation": "за, на, в"
+            }
+          ]
+        },
+        {
+          "name": "Числительные",
+          "words": [
+            {
+              "word": "zero",
+              "transcription": "[ˈziərəu]",
+              "translation": "0 – ноль"
+            },
+            {
+              "word": "one",
+              "transcription": "[wʌn]",
+              "translation": "1 – один"
+            },
+            {
+              "word": "two",
+              "transcription": "[tuː]",
+              "translation": "2 – два"
+            },
+            {
+              "word": "three",
+              "transcription": "[θriː]",
+              "translation": "3 – три"
+            },
+            {
+              "word": "four",
+              "transcription": "[fɔː]",
+              "translation": "4 – четыре"
+            },
+            {
+              "word": "five",
+              "transcription": "[faiv]",
+              "translation": "5 – пять"
+            },
+            {
+              "word": "six",
+              "transcription": "[siks]",
+              "translation": "6 – шесть"
+            },
+            {
+              "word": "seven",
+              "transcription": "[sevn]",
+              "translation": "7 – семь"
+            },
+            {
+              "word": "eight",
+              "transcription": "[eit]",
+              "translation": "8 – восемь"
+            },
+            {
+              "word": "nine",
+              "transcription": "[nain]",
+              "translation": "9 – девять"
+            },
+            {
+              "word": "ten",
+              "transcription": "[ten]",
+              "translation": "10 – десять"
+            },
+            {
+              "word": "eleven",
+              "transcription": "[iˈlevn]",
+              "translation": "11 – одиннадцать"
+            },
+            {
+              "word": "twelve",
+              "transcription": "[twelv]",
+              "translation": "12 – двенадцать"
+            },
+            {
+              "word": "thirteen",
+              "transcription": "[θɜːˈtiːn]",
+              "translation": "13 – тринадцать"
+            },
+            {
+              "word": "fourteen",
+              "transcription": "[fɔːˈtiːn]",
+              "translation": "14 – четырнадцать"
+            },
+            {
+              "word": "fifteen",
+              "transcription": "[fifˈtiːn]",
+              "translation": "15 – пятнадцать"
+            },
+            {
+              "word": "sixteen",
+              "transcription": "[sixˈtiːn]",
+              "translation": "16 – шестнадцать"
+            },
+            {
+              "word": "seventeen",
+              "transcription": "[sevnˈtiːn]",
+              "translation": "17 – семнадцать"
+            },
+            {
+              "word": "eighteen",
+              "transcription": "[eiˈtiːn]",
+              "translation": "18 – восемнадцать"
+            },
+            {
+              "word": "nineteen",
+              "transcription": "[nainˈtiːn]",
+              "translation": "19 – девятнадцать"
+            },
+            {
+              "word": "twenty",
+              "transcription": "[ˈtwenti]",
+              "translation": "20 – двадцать"
+            },
+            {
+              "word": "thirty",
+              "transcription": "[ˈθɜːtɪ]",
+              "translation": "30 – тридцать"
+            },
+            {
+              "word": "forty",
+              "transcription": "[fɔːtɪ]",
+              "translation": "40 – сорок"
+            },
+            {
+              "word": "fifty",
+              "transcription": "[fɪftɪ]",
+              "translation": "50 – пятьдесят"
+            },
+            {
+              "word": "sixty",
+              "transcription": "[sɪkstɪ]",
+              "translation": "60 – шестьдесят"
+            },
+            {
+              "word": "seventy",
+              "transcription": "[sevntɪ]",
+              "translation": "70 – семьдесят"
+            },
+            {
+              "word": "eighty",
+              "transcription": "[eɪtɪ]",
+              "translation": "80 – восемьдесят"
+            },
+            {
+              "word": "ninety",
+              "transcription": "[naɪntɪ]",
+              "translation": "90 – девяносто"
+            },
+            {
+              "word": "hundred",
+              "transcription": "[hʌndrɪd]",
+              "translation": "100 – сотня/сто"
+            },
+            {
+              "word": "thousand",
+              "transcription": "[θauzənd]",
+              "translation": "1 000 – тысяча"
+            },
+            {
+              "word": "million",
+              "transcription": "[ˈmɪljən]",
+              "translation": "1 000 000 - миллион"
+            },
+            {
+              "word": "zeroth",
+              "transcription": "[ˈzɪərəuθ]",
+              "translation": "0th – нулевой"
+            },
+            {
+              "word": "first",
+              "transcription": "[fɜːst]",
+              "translation": "1st – первый, сначала"
+            },
+            {
+              "word": "second",
+              "transcription": "[ˈsek(ə)nd]",
+              "translation": "2nd – второй, секунда"
+            },
+            {
+              "word": "third",
+              "transcription": "[θɜːd]",
+              "translation": "3rd – третий"
+            },
+            {
+              "word": "fourth",
+              "transcription": "[fɔːθ]",
+              "translation": "4th – четвертый"
+            },
+            {
+              "word": "fifth",
+              "transcription": "[fɪfθ]",
+              "translation": "5th – пятый"
+            },
+            {
+              "word": "sixth",
+              "transcription": "[sɪksθ]",
+              "translation": "6th – шестой"
+            },
+            {
+              "word": "seventh",
+              "transcription": "[ˈsevnθ]",
+              "translation": "7th – седьмой"
+            },
+            {
+              "word": "eighth",
+              "transcription": "[eɪtθ]",
+              "translation": "8th – восьмой"
+            },
+            {
+              "word": "ninth",
+              "transcription": "[naɪnθ]",
+              "translation": "9th – девятый"
+            },
+            {
+              "word": "tenth",
+              "transcription": "[tenθ]",
+              "translation": "10th – десятый"
+            },
+            {
+              "word": "eleventh",
+              "transcription": "[ɪˈlevnθ]",
+              "translation": "11th – одиннадцатый"
+            },
+            {
+              "word": "twelfth",
+              "transcription": "[twelfθ]",
+              "translation": "12th – двенадцатый"
+            },
+            {
+              "word": "thirteenth",
+              "transcription": "[θɜːˈtiːnθ]",
+              "translation": "13th — тринадцатый"
+            },
+            {
+              "word": "twentieth",
+              "transcription": "[ˈtwentiəθ]",
+              "translation": "20th — двадцатый"
+            },
+            {
+              "word": "ninety-ninth",
+              "transcription": "[ˈnaɪntɪ naɪnθ]",
+              "translation": "99th — девяносто девятый"
+            },
+            {
+              "word": "thousandth",
+              "transcription": "[θauz(ə)ndθ]",
+              "translation": "1000th — тысячный"
+            }
+          ]
+        },
+        {
+          "name": "Глаголы",
+          "words": [
+            {
+              "word": "clean",
+              "transcription": "[kliːn]",
+              "translation": "чистить, очищать, чистый"
+            },
+            {
+              "word": "learn",
+              "transcription": "[lɜːn]",
+              "translation": "учить(ся), узнавать"
+            },
+            {
+              "word": "brush",
+              "transcription": "[brʌʃ]",
+              "translation": "чистить щеткой, причесывать, щетка, кисть"
+            },
+            {
+              "word": "study",
+              "transcription": "[ˈstʌdɪ]",
+              "translation": "изучить, изучать, учиться, исследование, изучение"
+            },
+            {
+              "word": "call",
+              "transcription": "[kɔːl]",
+              "translation": "называть, звонить, вызов"
+            },
+            {
+              "word": "push",
+              "transcription": "[puʃ]",
+              "translation": "толкать, давить, нажимать, толчок"
+            },
+            {
+              "word": "pull",
+              "transcription": "[pul]",
+              "translation": "тянуть, натягивать, тащить, дергать, вытащить"
+            },
+            {
+              "word": "care",
+              "transcription": "[keə]",
+              "translation": "заботиться, ухаживать, забота"
+            },
+            {
+              "word": "smoke",
+              "transcription": "[sməuk]",
+              "translation": "курить, дымиться, дымить, дым, курение, дымок"
+            },
+            {
+              "word": "fry",
+              "transcription": "[fraɪ]",
+              "translation": "жарить, пожарить"
+            },
+            {
+              "word": "bake",
+              "transcription": "[beɪk]",
+              "translation": "печь, испечь, выпечка"
+            },
+            {
+              "word": "cry",
+              "transcription": "[kraɪ]",
+              "translation": "плакать, кричать, плачь, крик"
+            },
+            {
+              "word": "pick",
+              "transcription": "[pɪk]",
+              "translation": "выбирать, подбирать, срывать, собирать"
+            },
+            {
+              "word": "lift",
+              "transcription": "[lɪft]",
+              "translation": "поднимать, приподнять, подъем, лифт, подъемник"
+            },
+            {
+              "word": "salt",
+              "transcription": "[sɔːlt]",
+              "translation": "солить, посолить, соль, соленый"
+            },
+            {
+              "word": "shout",
+              "transcription": "[ʃaut]",
+              "translation": "кричать, крик"
+            },
+            {
+              "word": "jump",
+              "transcription": "[ʤʌmp]",
+              "translation": "перепрыгивать, прыгать, вскочить, прыжок"
+            },
+            {
+              "word": "paint",
+              "transcription": "[peɪnt]",
+              "translation": "рисовать, нарисовать, красить, краска"
+            },
+            {
+              "word": "hate",
+              "transcription": "[heɪt]",
+              "translation": "ненавидеть, ненависть"
+            },
+            {
+              "word": "spoil",
+              "transcription": "[spɔɪl]",
+              "translation": "портить, испортить, баловать"
+            },
+            {
+              "word": "fear",
+              "transcription": "[fiə]",
+              "translation": "бояться, опасаться, страх, опасение"
+            },
+            {
+              "word": "laugh",
+              "transcription": "[lɑːf]",
+              "translation": "смеяться, смех"
+            },
+            {
+              "word": "pack",
+              "transcription": "[pæk]",
+              "translation": "упаковывать, упаковка, пачка, пакет"
+            },
+            {
+              "word": "wave",
+              "transcription": "[weɪv]",
+              "translation": "махать, размахивать, волна"
+            },
+            {
+              "word": "tie",
+              "transcription": "[taɪ]",
+              "translation": "привязывать, завязывать, связывать, галстук"
+            },
+            {
+              "word": "untie",
+              "transcription": "[ʌnˈtaɪ]",
+              "translation": "развязать"
+            },
+            {
+              "word": "scare",
+              "transcription": "[skeə]",
+              "translation": "пугать, испугать"
+            },
+            {
+              "word": "continue",
+              "transcription": "[kənˈtɪnjuː]",
+              "translation": "продолжать(ся)"
+            },
+            {
+              "word": "offer",
+              "transcription": "[ˈɔfə]",
+              "translation": "предлагать, предложение"
+            },
+            {
+              "word": "appear",
+              "transcription": "[əˈpɪə]",
+              "translation": "появляться, показаться"
+            },
+            {
+              "word": "die",
+              "transcription": "[daɪ]",
+              "translation": "умирать"
+            },
+            {
+              "word": "stay",
+              "transcription": "[steɪ]",
+              "translation": "оставаться, останавливаться, пребывание"
+            },
+            {
+              "word": "reach",
+              "transcription": "[riːʧ]",
+              "translation": "достигать"
+            },
+            {
+              "word": "kill",
+              "transcription": "[kɪl]",
+              "translation": "убивать, убийство"
+            },
+            {
+              "word": "pass",
+              "transcription": "[pɑːs]",
+              "translation": "проходить, миновать, передавать, проход, переход, пас, пропуск"
+            },
+            {
+              "word": "decide",
+              "transcription": "[dɪˈsaɪd]",
+              "translation": "решать"
+            },
+            {
+              "word": "return",
+              "transcription": "[rɪˈtɜːn]",
+              "translation": "возвращать(ся), возвращение"
+            },
+            {
+              "word": "explain",
+              "transcription": "[ɪksˈpleɪn]",
+              "translation": "объяснять"
+            },
+            {
+              "word": "hope",
+              "transcription": "[həup]",
+              "translation": "надеяться, надежда"
+            },
+            {
+              "word": "develop",
+              "transcription": "[dɪˈveləp]",
+              "translation": "развивать, развиваться, разрабатывать"
+            },
+            {
+              "word": "support",
+              "transcription": "[səˈpɔːt]",
+              "translation": "поддерживать, поддержка"
+            },
+            {
+              "word": "produce",
+              "transcription": "[ˈprɒdjuːs]",
+              "translation": "производить, продукция"
+            },
+            {
+              "word": "cross",
+              "transcription": "[krɒs]",
+              "translation": "пересекать, пересечение, крест"
+            },
+            {
+              "word": "drop",
+              "transcription": "[drɒp]",
+              "translation": "ронять, падать, падение, капля, перепад"
+            },
+            {
+              "word": "enter",
+              "transcription": "[ˈentə]",
+              "translation": "входить, вводить"
+            },
+            {
+              "word": "escape",
+              "transcription": "[ɪˈskeɪp]",
+              "translation": "убежать, избегать, сбежать, спасение, побег"
+            },
+            {
+              "word": "belong",
+              "transcription": "[bɪˈlɔŋ]",
+              "translation": "принадлежать, относиться"
+            },
+            {
+              "word": "dance",
+              "transcription": "[dæns]",
+              "translation": "танцевать, танец"
+            },
+            {
+              "word": "explore",
+              "transcription": "[ɪksˈplɔː]",
+              "translation": "исследовать, разведывать"
+            },
+            {
+              "word": "visit",
+              "transcription": "[ˈvɪzɪt]",
+              "translation": "посещать, посещение"
+            },
+            {
+              "word": "agree",
+              "transcription": "[əˈɡriː]",
+              "translation": "соглашаться, согласовывать"
+            },
+            {
+              "word": "disagree",
+              "transcription": "[ˌdɪsəˈɡriː]",
+              "translation": "не соглашаться, расходиться во мнениях, не совпадать"
+            },
+            {
+              "word": "allow",
+              "transcription": "[əˈlau]",
+              "translation": "позволять, разрешать"
+            },
+            {
+              "word": "borrow",
+              "transcription": "[ˈbɒrəu]",
+              "translation": "занимать, заимствовать, перенимать"
+            },
+            {
+              "word": "discuss",
+              "transcription": "[dɪsˈkʌs]",
+              "translation": "обсуждать"
+            },
+            {
+              "word": "delay",
+              "transcription": "[dɪˈleɪ]",
+              "translation": "задерживать, задержка"
+            },
+            {
+              "word": "last",
+              "transcription": "[lɑːst]",
+              "translation": "длиться, последний, прошлый"
+            },
+            {
+              "word": "prepare",
+              "transcription": "[prɪˈpeə]",
+              "translation": "готовиться, подготовиться"
+            },
+            {
+              "word": "repeat",
+              "transcription": "[rɪˈpiːt]",
+              "translation": "повторять, повтор"
+            },
+            {
+              "word": "add",
+              "transcription": "[æd]",
+              "translation": "добавлять"
+            },
+            {
+              "word": "collect",
+              "transcription": "[kəˈlekt]",
+              "translation": "собирать"
+            },
+            {
+              "word": "fill",
+              "transcription": "[fɪl]",
+              "translation": "наполнять, заполнять"
+            },
+            {
+              "word": "require",
+              "transcription": "[rɪˈkwaɪə]",
+              "translation": "требовать"
+            },
+            {
+              "word": "order",
+              "transcription": "[ˈɔːdə]",
+              "translation": "заказывать, приказывать, порядок, приказ"
+            },
+            {
+              "word": "dry",
+              "transcription": "[draɪ]",
+              "translation": "сушить, сохнуть, высушить, сухой"
+            },
+            {
+              "word": "fix",
+              "transcription": "[fɪks]",
+              "translation": "исправлять, крепить, фиксировать, чинить"
+            },
+            {
+              "word": "repair",
+              "transcription": "[rɪˈpeə]",
+              "translation": "ремонтировать, восстанавливать, ремонт"
+            },
+            {
+              "word": "lock",
+              "transcription": "[lɒk]",
+              "translation": "запирать, замок"
+            },
+            {
+              "word": "unlock",
+              "transcription": "[ʌnˈlɒk]",
+              "translation": "разблокировать, отпереть, открывать"
+            },
+            {
+              "word": "mix",
+              "transcription": "[mɪks]",
+              "translation": "смешивать, перемешивать, соединение, смесь"
+            },
+            {
+              "word": "replace",
+              "transcription": "[rɪˈpleɪs]",
+              "translation": "заменять, замещать"
+            },
+            {
+              "word": "search",
+              "transcription": "[sɜːtʃ]",
+              "translation": "искать, поиск, осмотр, обыск"
+            },
+            {
+              "word": "test",
+              "transcription": "[test]",
+              "translation": "проверять, испытывать, тест"
+            },
+            {
+              "word": "touch",
+              "transcription": "[tʌtʃ]",
+              "translation": "касаться, трогать, контакт, касание, сенсорный"
+            },
+            {
+              "word": "accuse",
+              "transcription": "[əˈkjuːz]",
+              "translation": "обвинять, обвиняемый"
+            },
+            {
+              "word": "complain",
+              "transcription": "[kəmˈpleɪn]",
+              "translation": "жаловаться, выражать недовольство"
+            },
+            {
+              "word": "doubt",
+              "transcription": "[daut]",
+              "translation": "сомневаться, сомнение"
+            },
+            {
+              "word": "endure",
+              "transcription": "[ɪnˈdjuə]",
+              "translation": "терпеть, вынести, пережить"
+            },
+            {
+              "word": "enjoy",
+              "transcription": "[ɪnˈdʒoɪ]",
+              "translation": "наслаждаться"
+            },
+            {
+              "word": "praise",
+              "transcription": "[preɪz]",
+              "translation": "хвалить, похвала"
+            },
+            {
+              "word": "quarrel",
+              "transcription": "[ˈkwɒrəl]",
+              "translation": "ссориться, ссора"
+            },
+            {
+              "word": "pet",
+              "transcription": "[pet]",
+              "translation": "погладить животное, домашнее животное"
+            },
+            {
+              "word": "scold",
+              "transcription": "[skəuld]",
+              "translation": "ругать"
+            },
+            {
+              "word": "smile",
+              "transcription": "[smaɪl]",
+              "translation": "улыбаться, улыбка"
+            },
+            {
+              "word": "suffer",
+              "transcription": "[ˈsʌfə]",
+              "translation": "страдать, терпеть"
+            },
+            {
+              "word": "undress",
+              "transcription": "[ʌnˈdres]",
+              "translation": "раздеваться, раздевать"
+            },
+            {
+              "word": "earn",
+              "transcription": "[ɜːn]",
+              "translation": "зарабатывать"
+            },
+            {
+              "word": "marry",
+              "transcription": "[ˈmæri]",
+              "translation": "жениться, выходить замуж"
+            },
+            {
+              "word": "recover",
+              "transcription": "[rɪˈkʌvə]",
+              "translation": "выздоравливать, восстанавливать"
+            },
+            {
+              "word": "save",
+              "transcription": "[seɪv]",
+              "translation": "сохранять, экономить, спасать"
+            },
+            {
+              "word": "compare",
+              "transcription": "[kəmˈpeə]",
+              "translation": "сравнивать, сравнение"
+            },
+            {
+              "word": "correct",
+              "transcription": "[kəˈrekt]",
+              "translation": "исправлять, правильный, корректный"
+            },
+            {
+              "word": "count",
+              "transcription": "[kaunt]",
+              "translation": "считать"
+            },
+            {
+              "word": "describe",
+              "transcription": "[dɪˈskraɪb]",
+              "translation": "описывать"
+            },
+            {
+              "word": "invite",
+              "transcription": "[ɪnˈvaɪt]",
+              "translation": "приглашать, приглашение"
+            },
+            {
+              "word": "travel",
+              "transcription": "[ˈtrævl]",
+              "translation": "путешествовать, путешествие"
+            }
+          ]
+        },
+        {
+          "name": "Существительные",
+          "words": [
+            {
+              "word": "calendar",
+              "transcription": "[ˈkælɪndə]",
+              "translation": "календарь"
+            },
+            {
+              "word": "schedule",
+              "transcription": "[ˈskedʒuːl]",
+              "translation": "расписание, график, планировать"
+            },
+            {
+              "word": "air",
+              "transcription": "[eər]",
+              "translation": "воздух, воздушный, проветривать"
+            },
+            {
+              "word": "sky",
+              "transcription": "[skaɪ]",
+              "translation": "небеса, небо"
+            },
+            {
+              "word": "parent",
+              "transcription": "[ˈpeər(ə)nt]",
+              "translation": "родитель"
+            },
+            {
+              "word": "grandmother",
+              "transcription": "[ˈgræn(d)ˌmʌðə]",
+              "translation": "бабушка"
+            },
+            {
+              "word": "grandfather",
+              "transcription": "[ˈgræn(d)ˌfɑːðə]",
+              "translation": "дедушка"
+            },
+            {
+              "word": "kid",
+              "transcription": "[kɪd]",
+              "translation": "малыш, ребенок, козленок, дурачить, обманывать, шутить"
+            },
+            {
+              "word": "guest",
+              "transcription": "[ɡest]",
+              "translation": "гость"
+            },
+            {
+              "word": "sun",
+              "transcription": "[sʌn]",
+              "translation": "солнце"
+            },
+            {
+              "word": "moon",
+              "transcription": "[muːn]",
+              "translation": "луна, лунный"
+            },
+            {
+              "word": "ice",
+              "transcription": "[aɪs]",
+              "translation": "лёд, ледяной, покрываться льдом"
+            },
+            {
+              "word": "frost",
+              "transcription": "[frɒst]",
+              "translation": "мороз, подмораживать"
+            },
+            {
+              "word": "temperature",
+              "transcription": "[ˈtemp(ə)rətʃə]",
+              "translation": "температура"
+            },
+            {
+              "word": "sport",
+              "transcription": "[spɔːt]",
+              "translation": "спорт"
+            },
+            {
+              "word": "map",
+              "transcription": "[mæp]",
+              "translation": "карта"
+            },
+            {
+              "word": "building",
+              "transcription": "[ˈbɪldɪŋ]",
+              "translation": "здание, строение, строительство, строительный"
+            },
+            {
+              "word": "bus stop",
+              "transcription": "[bʌs stɔp]",
+              "translation": "автобусная остановка"
+            },
+            {
+              "word": "cafe",
+              "transcription": "[ˈkæfeɪ]",
+              "translation": "кафе"
+            },
+            {
+              "word": "restaurant",
+              "transcription": "[ˈrestərɔnt]",
+              "translation": "ресторан"
+            },
+            {
+              "word": "theater",
+              "transcription": "[ˈθɪətə]",
+              "translation": "театр"
+            },
+            {
+              "word": "movie",
+              "transcription": "[ˈmuːvɪ]",
+              "translation": "кино, кинотеатр, видеофайл"
+            },
+            {
+              "word": "museum",
+              "transcription": "[mjuːˈzɪəm]",
+              "translation": "музей"
+            },
+            {
+              "word": "bar",
+              "transcription": "[bɑː]",
+              "translation": "бар, полоса, стержень"
+            },
+            {
+              "word": "ticket office",
+              "transcription": "[ˈtɪkɪt ˈɒfɪs]",
+              "translation": "касса"
+            },
+            {
+              "word": "market",
+              "transcription": "[ˈmɑːkɪt]",
+              "translation": "рынок, рыночный, продавать"
+            },
+            {
+              "word": "supermarket",
+              "transcription": "[ˈs(j)uːpəˌmɑːkɪt]",
+              "translation": "супермаркет"
+            },
+            {
+              "word": "corner",
+              "transcription": "[ˈkɔːnə]",
+              "translation": "угол"
+            },
+            {
+              "word": "store",
+              "transcription": "[stɔː]",
+              "translation": "магазин, хранить, склад"
+            },
+            {
+              "word": "railway",
+              "transcription": "[ˈreɪlweɪ]",
+              "translation": "железная дорога"
+            },
+            {
+              "word": "square",
+              "transcription": "[skweə]",
+              "translation": "площадь, квадратный, квадрат"
+            },
+            {
+              "word": "alley",
+              "transcription": "[ˈælɪ]",
+              "translation": "переулок, аллея"
+            },
+            {
+              "word": "area",
+              "transcription": "[ˈe(ə)rɪə]",
+              "translation": "район, площадь, область, участок"
+            },
+            {
+              "word": "site",
+              "transcription": "[saɪt]",
+              "translation": "сайт, место, участок"
+            },
+            {
+              "word": "port",
+              "transcription": "[pɔːt]",
+              "translation": "порт, разъём, порт (компьютерный)"
+            },
+            {
+              "word": "transport",
+              "transcription": "[ˈtræn(t)spɔːt]",
+              "translation": "транспорт, транспортировать, перевозить"
+            },
+            {
+              "word": "truck",
+              "transcription": "[trʌk]",
+              "translation": "грузовой автомобиль"
+            },
+            {
+              "word": "bike",
+              "transcription": "[baɪk]",
+              "translation": "велосипед"
+            },
+            {
+              "word": "bicycle",
+              "transcription": "[ˈbaɪsɪkl]",
+              "translation": "велосипед"
+            },
+            {
+              "word": "motorcycle",
+              "transcription": "[ˈməutəsaɪk(ə)l]",
+              "translation": "мотоцикл"
+            },
+            {
+              "word": "taxi",
+              "transcription": "[ˈtæksɪ]",
+              "translation": "такси"
+            },
+            {
+              "word": "cab",
+              "transcription": "[kæb]",
+              "translation": "такси, кабина водителя"
+            },
+            {
+              "word": "tractor",
+              "transcription": "[ˈtræktə]",
+              "translation": "трактор"
+            },
+            {
+              "word": "petrol",
+              "transcription": "[ˈpetrəl]",
+              "translation": "бензин, бензиновый"
+            },
+            {
+              "word": "oil",
+              "transcription": "[ɔɪl]",
+              "translation": "масло, нефть"
+            },
+            {
+              "word": "wheel",
+              "transcription": "[wiːl]",
+              "translation": "колесо, катить, поворачивать"
+            },
+            {
+              "word": "tool",
+              "transcription": "[tuːl]",
+              "translation": "инструмент"
+            },
+            {
+              "word": "garage",
+              "transcription": "[ˈgærɑːʒ]",
+              "translation": "гараж, автомастерская"
+            },
+            {
+              "word": "airport",
+              "transcription": "[ˈeəpɔːt]",
+              "translation": "аэропорт"
+            },
+            {
+              "word": "bag",
+              "transcription": "[bæg]",
+              "translation": "сумка, чехол, мешок"
+            },
+            {
+              "word": "backpack",
+              "transcription": "[ˈbækpæk]",
+              "translation": "рюкзак"
+            },
+            {
+              "word": "body",
+              "transcription": "[ˈbɔdɪ]",
+              "translation": "тело"
+            },
+            {
+              "word": "back",
+              "transcription": "[bæk]",
+              "translation": "спина, спинка, задняя сторона, назад, обратно, задний, обратный"
+            },
+            {
+              "word": "front",
+              "transcription": "[frʌnt]",
+              "translation": "фронт, передняя сторона, перед, передний, лицевой"
+            },
+            {
+              "word": "head",
+              "transcription": "[hed]",
+              "translation": "голова, головка, руководитель, головной, возглавлять"
+            },
+            {
+              "word": "hand",
+              "transcription": "[hænd]",
+              "translation": "рука (кисть), ручной, передавать"
+            },
+            {
+              "word": "tooth",
+              "transcription": "[tuːθ]",
+              "translation": "зуб"
+            },
+            {
+              "word": "teeth",
+              "transcription": "[tiːθ]",
+              "translation": "зубы"
+            },
+            {
+              "word": "foot",
+              "transcription": "[fut]",
+              "translation": "ступня, нога"
+            },
+            {
+              "word": "health",
+              "transcription": "[helθ]",
+              "translation": "здоровье"
+            },
+            {
+              "word": "pain",
+              "transcription": "[peɪn]",
+              "translation": "боль"
+            },
+            {
+              "word": "medicine",
+              "transcription": "[ˈmedsən]",
+              "translation": "лекарство, медицина"
+            },
+            {
+              "word": "size",
+              "transcription": "[saɪz]",
+              "translation": "размер, формат, величина"
+            },
+            {
+              "word": "meat",
+              "transcription": "[miːt]",
+              "translation": "мясо"
+            },
+            {
+              "word": "egg",
+              "transcription": "[eg]",
+              "translation": "яйцо"
+            },
+            {
+              "word": "pizza",
+              "transcription": "[ˈpiːtsə]",
+              "translation": "пицца"
+            },
+            {
+              "word": "bread",
+              "transcription": "[bred]",
+              "translation": "хлеб"
+            },
+            {
+              "word": "soup",
+              "transcription": "[suːp]",
+              "translation": "суп"
+            },
+            {
+              "word": "salad",
+              "transcription": "[ˈsæləd]",
+              "translation": "салат"
+            },
+            {
+              "word": "sugar",
+              "transcription": "[ˈʃugə]",
+              "translation": "сахар"
+            },
+            {
+              "word": "candy",
+              "transcription": "[ˈkændɪ]",
+              "translation": "конфета"
+            },
+            {
+              "word": "cake",
+              "transcription": "[keɪk]",
+              "translation": "торт, пирог, кекс"
+            },
+            {
+              "word": "cookie",
+              "transcription": "[ˈkukɪ]",
+              "translation": "печенье"
+            },
+            {
+              "word": "chocolate",
+              "transcription": "[ˈʧɔklət]",
+              "translation": "шоколад"
+            },
+            {
+              "word": "chicken",
+              "transcription": "[ˈʧɪkɪn]",
+              "translation": "курица, цыпленок, курятина"
+            },
+            {
+              "word": "butter",
+              "transcription": "[ˈbʌtə]",
+              "translation": "масло"
+            },
+            {
+              "word": "cheese",
+              "transcription": "[ʧiːz]",
+              "translation": "сыр"
+            },
+            {
+              "word": "tea",
+              "transcription": "[tiː]",
+              "translation": "чай"
+            },
+            {
+              "word": "milk",
+              "transcription": "[mɪlk]",
+              "translation": "молоко, доить"
+            },
+            {
+              "word": "juice",
+              "transcription": "[dʒuːs]",
+              "translation": "сок"
+            },
+            {
+              "word": "soda",
+              "transcription": "[ˈsəudə]",
+              "translation": "сода, газированная вода, содовый"
+            },
+            {
+              "word": "plate",
+              "transcription": "[pleɪt]",
+              "translation": "тарелка"
+            },
+            {
+              "word": "cup",
+              "transcription": "[kʌp]",
+              "translation": "чашка"
+            },
+            {
+              "word": "mug",
+              "transcription": "[mʌg]",
+              "translation": "кружка"
+            },
+            {
+              "word": "spoon",
+              "transcription": "[spuːn]",
+              "translation": "ложка"
+            },
+            {
+              "word": "fork",
+              "transcription": "[fɔːk]",
+              "translation": "вилка"
+            },
+            {
+              "word": "knife",
+              "transcription": "[naɪf]",
+              "translation": "нож"
+            },
+            {
+              "word": "glass",
+              "transcription": "[glɑːs]",
+              "translation": "стакан, стекло"
+            },
+            {
+              "word": "kettle",
+              "transcription": "[ˈketl]",
+              "translation": "чайник"
+            },
+            {
+              "word": "window",
+              "transcription": "[ˈwɪndəu]",
+              "translation": "окно"
+            },
+            {
+              "word": "door",
+              "transcription": "[dɔː]",
+              "translation": "дверь, дверной"
+            },
+            {
+              "word": "floor",
+              "transcription": "[flɔː]",
+              "translation": "пол, этаж"
+            },
+            {
+              "word": "wall",
+              "transcription": "[wɔːl]",
+              "translation": "стена, настенный"
+            },
+            {
+              "word": "entry",
+              "transcription": "[ˈentrɪ]",
+              "translation": "вход, въезд, вступление, запись, входной"
+            },
+            {
+              "word": "exit",
+              "transcription": "[ˈegzɪt]",
+              "translation": "выходить, выход, выезд, выходной"
+            },
+            {
+              "word": "kitchen",
+              "transcription": "[ˈkɪʧɪn]",
+              "translation": "кухня, кухонный"
+            },
+            {
+              "word": "bedroom",
+              "transcription": "[ˈbedruːm]",
+              "translation": "спальня"
+            },
+            {
+              "word": "bathroom",
+              "transcription": "[ˈbæθruːm]",
+              "translation": "ванная комната, ванная, туалет"
+            },
+            {
+              "word": "living room",
+              "transcription": "[ˈlɪvɪŋˌrum]",
+              "translation": "гостиная"
+            },
+            {
+              "word": "balcony",
+              "transcription": "[ˈbælkənɪ]",
+              "translation": "балкон"
+            },
+            {
+              "word": "suit",
+              "transcription": "[sjuːt]",
+              "translation": "костюм, иск, масть, подходить, годиться"
+            },
+            {
+              "word": "skirt",
+              "transcription": "[skɜːt]",
+              "translation": "юбка"
+            },
+            {
+              "word": "dress",
+              "transcription": "[dres]",
+              "translation": "платье, одевать(ся)"
+            },
+            {
+              "word": "shirt",
+              "transcription": "[ʃɜːt]",
+              "translation": "рубашка"
+            },
+            {
+              "word": "T-shirt",
+              "transcription": "[ˈtiːʃɜːt]",
+              "translation": "футболка"
+            },
+            {
+              "word": "trousers",
+              "transcription": "[ˈtrauzəz]",
+              "translation": "брюки"
+            },
+            {
+              "word": "sock",
+              "transcription": "[sɔk]",
+              "translation": "носок"
+            },
+            {
+              "word": "swimsuit",
+              "transcription": "[ˈswɪmˌsuːt]",
+              "translation": "купальник"
+            },
+            {
+              "word": "underwear",
+              "transcription": "[ˈʌndəweə]",
+              "translation": "нижнее белье"
+            },
+            {
+              "word": "jeans",
+              "transcription": "[ʤiːnz]",
+              "translation": "джинсы"
+            },
+            {
+              "word": "shorts",
+              "transcription": "[ʃɔːts]",
+              "translation": "шорты"
+            },
+            {
+              "word": "boot",
+              "transcription": "[buːt]",
+              "translation": "ботинок, сапог, багажник"
+            },
+            {
+              "word": "hat",
+              "transcription": "[hæt]",
+              "translation": "шляпа, шапка"
+            },
+            {
+              "word": "jacket",
+              "transcription": "[ˈʤækɪt]",
+              "translation": "куртка"
+            },
+            {
+              "word": "coat",
+              "transcription": "[kəut]",
+              "translation": "пальто"
+            },
+            {
+              "word": "apple",
+              "transcription": "[æpl]",
+              "translation": "яблоко, яблочный"
+            },
+            {
+              "word": "lemon",
+              "transcription": "[ˈlemən]",
+              "translation": "лимон"
+            },
+            {
+              "word": "cherry",
+              "transcription": "[ˈʧerɪ]",
+              "translation": "вишня"
+            },
+            {
+              "word": "potato",
+              "transcription": "[pəˈteɪtəu]",
+              "translation": "картофель"
+            },
+            {
+              "word": "onion",
+              "transcription": "[ˈʌnjən]",
+              "translation": "лук"
+            },
+            {
+              "word": "carrot",
+              "transcription": "[ˈkærət]",
+              "translation": "морковь"
+            },
+            {
+              "word": "cucumber",
+              "transcription": "[ˈkjuːkʌmbə]",
+              "translation": "огурец"
+            },
+            {
+              "word": "pepper",
+              "transcription": "[ˈpepə]",
+              "translation": "перец"
+            },
+            {
+              "word": "tomato",
+              "transcription": "[təˈmɑːtəu]",
+              "translation": "помидор"
+            },
+            {
+              "word": "bush",
+              "transcription": "[buʃ]",
+              "translation": "кустарник, куст"
+            },
+            {
+              "word": "pet",
+              "transcription": "[pet]",
+              "translation": "домашнее животное, ласкать"
+            },
+            {
+              "word": "cat",
+              "transcription": "[kæt]",
+              "translation": "кот, кошка"
+            },
+            {
+              "word": "dog",
+              "transcription": "[dɒɡ]",
+              "translation": "собака"
+            },
+            {
+              "word": "insect",
+              "transcription": "[ˈɪnsekt]",
+              "translation": "насекомое"
+            },
+            {
+              "word": "table",
+              "transcription": "[ˈteɪbl]",
+              "translation": "стол, таблица, настольный, табличный"
+            },
+            {
+              "word": "bed",
+              "transcription": "[bed]",
+              "translation": "кровать, постель"
+            },
+            {
+              "word": "chair",
+              "transcription": "[ʧeə]",
+              "translation": "стул"
+            },
+            {
+              "word": "shelf",
+              "transcription": "[ʃelf]",
+              "translation": "полка, шельф"
+            },
+            {
+              "word": "couch",
+              "transcription": "[kautʃ]",
+              "translation": "диван, кушетка"
+            },
+            {
+              "word": "closet",
+              "transcription": "[ˈklɔzɪt]",
+              "translation": "чулан, стенной шкаф"
+            },
+            {
+              "word": "refrigerator",
+              "transcription": "[rɪˈfrɪʤ(ə)reɪtə]",
+              "translation": "холодильник"
+            },
+            {
+              "word": "microwave",
+              "transcription": "[ˈmaɪkrə(u)weɪv]",
+              "translation": "микроволновая печь"
+            },
+            {
+              "word": "stove",
+              "transcription": "[stəuv]",
+              "translation": "печь отопительная, печка, кухонная плита, печной"
+            },
+            {
+              "word": "oven",
+              "transcription": "[ˈʌv(ə)n]",
+              "translation": "духовка"
+            },
+            {
+              "word": "television",
+              "transcription": "[ˈtelɪvɪʒən]",
+              "translation": "телевизор, телевидение, телевизионный"
+            },
+            {
+              "word": "computer",
+              "transcription": "[kəmˈpjuːtə]",
+              "translation": "компьютер"
+            },
+            {
+              "word": "telephone",
+              "transcription": "[ˈtelɪfəun]",
+              "translation": "звонить по телефону, телефон"
+            },
+            {
+              "word": "radio",
+              "transcription": "[ˈreɪdɪəu]",
+              "translation": "радио, радиоприемник"
+            },
+            {
+              "word": "video",
+              "transcription": "[ˈvɪdɪəu]",
+              "translation": "видео"
+            },
+            {
+              "word": "message",
+              "transcription": "[ˈmesɪʤ]",
+              "translation": "послание, сообщение"
+            },
+            {
+              "word": "text",
+              "transcription": "[tekst]",
+              "translation": "текст"
+            },
+            {
+              "word": "chapter",
+              "transcription": "[ˈʧæptə]",
+              "translation": "глава"
+            },
+            {
+              "word": "page",
+              "transcription": "[peɪʤ]",
+              "translation": "страница"
+            },
+            {
+              "word": "paper",
+              "transcription": "[ˈpeɪpə]",
+              "translation": "документ, бумага, статья, газета"
+            },
+            {
+              "word": "document",
+              "transcription": "[ˈdɒkjumənt]",
+              "translation": "документ, документировать"
+            },
+            {
+              "word": "TV serial",
+              "transcription": "[tiːˈviː ˈsɪərɪəl]",
+              "translation": "телесериал"
+            },
+            {
+              "word": "TV show",
+              "transcription": "[tiːˈviː ʃəu]",
+              "translation": "телепередача"
+            },
+            {
+              "word": "news",
+              "transcription": "[njuːz]",
+              "translation": "новость, новости, известие, новостной"
+            },
+            {
+              "word": "cartoon",
+              "transcription": "[kɑːˈtuːn]",
+              "translation": "мультфильм, карикатура, мультипликация, комикс, анимация"
+            },
+            {
+              "word": "image",
+              "transcription": "[ˈɪmɪʤ]",
+              "translation": "образ, изображение, имидж"
+            },
+            {
+              "word": "toy",
+              "transcription": "[tɔɪ]",
+              "translation": "игрушка, игрушечный"
+            },
+            {
+              "word": "class",
+              "transcription": "[klɑːs]",
+              "translation": "класс, урок"
+            },
+            {
+              "word": "bottle",
+              "transcription": "[ˈbɑːtl]",
+              "translation": "бутылка"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
