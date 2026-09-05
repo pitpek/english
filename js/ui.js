@@ -284,6 +284,11 @@ function renderWrite() {
   input.focus();
   $("writeForm").onsubmit = (e) => {
     e.preventDefault();
+    if (state.write.answered) {
+      state.write = null;
+      render();
+      return;
+    }
     checkWrite(input.value);
   };
   $("nextWrite").onclick = () => {
@@ -293,6 +298,7 @@ function renderWrite() {
 }
 
 function checkWrite(value) {
+  if (!state.write || state.write.answered) return;
   const w = state.write.card;
   const expected = back(w);
   const ok = answersMatch(value, w);

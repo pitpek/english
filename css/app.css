@@ -207,7 +207,7 @@
     .star { background: none; border: 0; color: var(--muted); font-size: 18px; padding: 4px; }
     .star.on { color: var(--star); }
     .empty { color: var(--muted); text-align: center; padding: 60px 20px; }
-    .session { color: var(--muted); font-size: 13px; }
+    .session { color: var(--muted); font-size: 13px; margin-bottom: 10px; }
     .hidden { display: none !important; }
     .file-btn { position: relative; overflow: hidden; }
     .file-btn input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }

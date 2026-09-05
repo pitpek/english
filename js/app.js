@@ -139,6 +139,14 @@ document.addEventListener("keydown", (e) => {
     setFiltersOpen(false);
     closeInstallModal();
   }
+  if (state.mode === "write" && e.key === "Enter" && state.write?.answered) {
+    const next = $("nextWrite");
+    if (next && !next.classList.contains("hidden")) {
+      e.preventDefault();
+      next.click();
+      return;
+    }
+  }
   if (e.target.matches("input, textarea, select")) return;
   if (state.mode === "cards") {
     if (e.code === "Space") {
