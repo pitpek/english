@@ -11,7 +11,6 @@ import {
   current,
   pickCard,
 } from "./state.js";
-import { renderReader } from "./reader.js";
 
 export function updateProgress() {
   const total = state.all.length || 1;
@@ -275,37 +274,27 @@ function renderWrite() {
       ${state.dir === "en-ru" ? `<div class="ipa">${esc(w.transcription)}</div>` : ""}
     </div>
     <form class="write-box" id="writeForm">
-      <input id="writeInput" autocomplete="off" placeholder="${session.revealed ? "Впишите правильный ответ" : "Введите перевод"}" />
+      <input id="writeInput" autocomplete="off" enterkeyhint="done" placeholder="${session.revealed ? "Впишите правильный ответ" : "Введите перевод"}" />
       <button class="primary" type="submit">Проверить</button>
     </form>
     <div class="feedback" id="feedback"></div>
-    <div class="card-nav single"><span></span><button class="ghost hidden" id="nextWrite" type="button">Дальше</button></div>
   `;
   const input = $("writeInput");
   const fb = $("feedback");
-  if (session.revealed && !session.answered) {
+  if (session.revealed) {
     fb.style.color = "var(--bad)";
     fb.innerHTML = `Неверно. Правильный ответ: <b>${esc(back(w))}</b>. Впишите его, чтобы продолжить.`;
-  }
-  if (session.answered) {
-    fb.style.color = "var(--ok)";
-    fb.textContent = "Верно";
-    $("nextWrite").classList.remove("hidden");
   }
   input.focus();
   $("writeForm").onsubmit = (e) => {
     e.preventDefault();
-    if (state.write.answered) {
-      state.write = null;
-      render();
-      return;
-    }
     checkWrite(input.value);
   };
-  $("nextWrite").onclick = () => {
-    state.write = null;
-    render();
-  };
+}
+
+function advanceWrite() {
+  state.write = null;
+  render();
 }
 
 function checkWrite(value) {
@@ -324,20 +313,13 @@ function checkWrite(value) {
       input.focus();
       return;
     }
-    state.write.answered = true;
-    fb.style.color = "var(--ok)";
-    fb.textContent = "Верно";
-    $("nextWrite").classList.remove("hidden");
-    input.blur();
+    advanceWrite();
     return;
   }
 
   if (ok) {
-    state.write.answered = true;
-    fb.style.color = "var(--ok)";
-    fb.textContent = "Верно";
-    $("nextWrite").classList.remove("hidden");
     record(w, true);
+    advanceWrite();
     return;
   }
 
@@ -354,11 +336,29 @@ function answersMatch(value, w) {
   const u = normalize(value);
   if (!u) return false;
   if (state.dir === "en-ru") {
-    const parts = w.translation.split(/[,;/]/).map(normalize).filter(Boolean);
-    return parts.some((p) => p === u || p.startsWith(u) || u === p.split(" ")[0]) || normalize(w.translation) === u;
+    const parts = translationParts(w.translation);
+    return parts.some((p) => p === u || p.startsWith(u) || u === p.split(" ")[0]);
   }
   const word = normalize(w.word.replace(/\(.*?\)/g, ""));
   return u === word || word.split(" ").includes(u);
+}
+
+function translationParts(text) {
+  const out = new Set();
+  const add = (s) => {
+    const n = normalize(s);
+    if (n) out.add(n);
+  };
+  add(text);
+  for (const chunk of String(text || "").split(/[,;/]/)) {
+    add(chunk);
+    const dash = chunk.split(/[–—−]/);
+    if (dash.length > 1) {
+      dash.forEach(add);
+      add(dash.slice(1).join(" "));
+    }
+  }
+  return [...out];
 }
 
 function renderMatch() {
@@ -521,13 +521,11 @@ export function toggleStar() {
 }
 
 export function render() {
-  document.body.classList.toggle("mode-reader", state.mode === "reader");
   document.body.classList.toggle("mode-quiz", state.mode === "cards" || state.mode === "learn");
   if (state.mode === "cards") renderCards();
   else if (state.mode === "learn") renderLearn();
   else if (state.mode === "write") renderWrite();
   else if (state.mode === "match") renderMatch();
-  else if (state.mode === "reader") renderReader();
   else renderList();
 }
 

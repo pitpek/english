@@ -33,7 +33,7 @@ export function normalize(s) {
   return (s || "")
     .toLowerCase()
     .replace(/ё/g, "е")
-    .replace(/[()[\].,!?;:«»"'`/-]/g, " ")
+    .replace(/[()[\].,!?;:«»"'`/–—−-]/g, " ")
     .replace(/\s+/g, " ")
     .trim();
 }

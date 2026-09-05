@@ -15,19 +15,6 @@ export const state = {
   learnN: 0,
   write: null,
   match: null,
-  reader: {
-    catalog: null,
-    loading: false,
-    error: "",
-    file: "",
-    book: null,
-    chapter: 0,
-    page: 0,
-    pageCount: 1,
-    fontSize: 20,
-    chapterHtml: "",
-    blobs: [],
-  },
   source: "",
 };
 
