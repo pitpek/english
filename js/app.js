@@ -146,6 +146,10 @@ document.addEventListener("keydown", (e) => {
     }
     if (e.key === "ArrowRight") step(1);
     if (e.key === "ArrowLeft") step(-1);
+    if (e.key === "Enter") {
+      e.preventDefault();
+      step(e.shiftKey ? -1 : 1);
+    }
     if (e.key === "1") mark(false);
     if (e.key === "2") mark(true);
     if (e.key === "s") toggleStar();
