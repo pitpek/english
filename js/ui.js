@@ -47,7 +47,6 @@ export function applyFilters() {
   state.flipped = false;
   state.learn = null;
   state.write = null;
-  state.match = null;
   updateProgress();
   updateFilterToggle();
   render();
@@ -361,112 +360,6 @@ function translationParts(text) {
   return [...out];
 }
 
-function renderMatch() {
-  if (!state.match || !state.match.top) startMatch();
-  const m = state.match;
-  if (!m) return empty();
-  $("stage").innerHTML = `
-    <div class="session">Найдите пары · осталось ${m.top.filter((x) => !x.gone).length}</div>
-    <div class="match-board">
-      <div class="match-group">
-        <div class="match-label">${esc(m.topLabel)}</div>
-        <div class="match-grid" id="matchTop"></div>
-      </div>
-      <div class="match-group">
-        <div class="match-label">${esc(m.bottomLabel)}</div>
-        <div class="match-grid" id="matchBottom"></div>
-      </div>
-    </div>
-    <div class="feedback" id="feedback"></div>
-    <div class="card-nav single"><span></span><button class="primary hidden" id="nextMatch" type="button">Новый раунд</button></div>
-  `;
-  fillMatchGrid("matchTop", "top");
-  fillMatchGrid("matchBottom", "bottom");
-  $("nextMatch").onclick = () => {
-    state.match = null;
-    render();
-  };
-  if (m.top.every((x) => x.gone)) {
-    $("feedback").textContent = "Все пары найдены";
-    $("feedback").style.color = "var(--ok)";
-    $("nextMatch").classList.remove("hidden");
-  }
-}
-
-function fillMatchGrid(id, side) {
-  const m = state.match;
-  const grid = $(id);
-  m[side].forEach((item, i) => {
-    const selected = m.sel && m.sel.side === side && m.sel.i === i;
-    const b = document.createElement("button");
-    b.className = "match-item" + (item.gone ? " gone" : "") + (selected ? " selected" : "");
-    b.type = "button";
-    b.textContent = item.text;
-    b.onclick = () => tapMatch(side, i);
-    grid.appendChild(b);
-  });
-}
-
-function startMatch() {
-  const sample = shuffle(state.filtered).slice(0, 6);
-  if (sample.length < 2) {
-    state.match = null;
-    return;
-  }
-  const pairs = sample.map((card) => ({ id: wordId(card), card }));
-  const enFirst = state.dir === "en-ru";
-  const top = shuffle(pairs.map((p) => ({
-    id: p.id,
-    text: enFirst ? p.card.word : p.card.translation,
-    card: p.card,
-    gone: false,
-  })));
-  const bottom = shuffle(pairs.map((p) => ({
-    id: p.id,
-    text: enFirst ? p.card.translation : p.card.word,
-    card: p.card,
-    gone: false,
-  })));
-  state.match = {
-    top,
-    bottom,
-    topLabel: enFirst ? "English" : "Русский",
-    bottomLabel: enFirst ? "Русский" : "English",
-    sel: null,
-  };
-}
-
-function tapMatch(side, i) {
-  const m = state.match;
-  const item = m[side][i];
-  if (item.gone) return;
-  if (m.sel == null) {
-    m.sel = { side, i };
-    renderMatch();
-    return;
-  }
-  if (m.sel.side === side && m.sel.i === i) {
-    m.sel = null;
-    renderMatch();
-    return;
-  }
-  if (m.sel.side === side) {
-    m.sel = { side, i };
-    renderMatch();
-    return;
-  }
-  const a = m[m.sel.side][m.sel.i];
-  const ok = a.id === item.id;
-  if (ok) {
-    a.gone = item.gone = true;
-    record(item.card, true);
-  } else {
-    record(item.card, false);
-  }
-  m.sel = null;
-  renderMatch();
-}
-
 function renderList() {
   if (!state.filtered.length) return empty();
   const rows = state.filtered
@@ -525,7 +418,6 @@ export function render() {
   if (state.mode === "cards") renderCards();
   else if (state.mode === "learn") renderLearn();
   else if (state.mode === "write") renderWrite();
-  else if (state.mode === "match") renderMatch();
   else renderList();
 }
 

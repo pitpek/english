@@ -175,23 +175,6 @@
     }
     .write-box input:focus { border-color: var(--accent-2); }
     .feedback { margin-top: 14px; min-height: 24px; font-weight: 600; overflow-wrap: anywhere; }
-    .match-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px;
-    }
-    .match-board { display: flex; flex-direction: column; gap: 16px; }
-    .match-label {
-      font-size: 11px; text-transform: uppercase; letter-spacing: .12em;
-      color: var(--muted); margin-bottom: 6px;
-    }
-    .match-group .match-grid { margin-top: 0; }
-    .match-item {
-      padding: 14px; border-radius: 14px; background: var(--panel);
-      border: 2px solid var(--line); text-align: left; color: var(--text);
-      white-space: normal; overflow-wrap: anywhere; word-break: break-word;
-      max-width: 100%; min-width: 0; line-height: 1.35;
-    }
-    .match-item.selected { border-color: var(--accent); background: rgba(245,197,66,.1); }
-    .match-item.gone { opacity: .28; pointer-events: none; }
     .list {
       display: grid; gap: 8px;
     }
@@ -293,7 +276,7 @@
       .chip, .ghost, .icon-btn, .primary {
         min-height: 40px; min-width: 0;
       }
-      .choice, .match-item { min-height: 44px; white-space: normal; }
+      .choice { min-height: 44px; white-space: normal; }
       .tools {
         width: 100%;
         display: grid;
@@ -370,7 +353,6 @@
       .choices { gap: 8px; margin-top: 12px; grid-template-columns: 1fr 1fr; }
       .quiz-dock .choices { margin-top: 0; }
       .choice { padding: 12px 14px; font-size: 15px; line-height: 1.35; }
-      .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
       .list { gap: 6px; }
       .list-row {
         grid-template-columns: 1fr auto;

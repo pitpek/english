@@ -40,7 +40,6 @@ document.querySelectorAll(".mode").forEach((btn) => {
     state.mode = btn.dataset.mode;
     state.learn = null;
     state.write = null;
-    state.match = null;
     state.learnN = 0;
     render();
   };
@@ -52,7 +51,6 @@ $("dirBtn").onclick = () => {
   $("dirBtn").classList.toggle("active", true);
   state.learn = null;
   state.write = null;
-  state.match = null;
   render();
 };
 
@@ -62,7 +60,6 @@ $("shuffleBtn").onclick = () => {
   state.flipped = false;
   state.learn = null;
   state.write = null;
-  state.match = null;
   render();
 };
 

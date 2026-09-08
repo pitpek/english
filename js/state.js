@@ -14,7 +14,6 @@ export const state = {
   learn: null,
   learnN: 0,
   write: null,
-  match: null,
   source: "",
 };
 
