@@ -47,6 +47,7 @@ export function applyFilters() {
   state.flipped = false;
   state.learn = null;
   state.write = null;
+  state.writeSeen = new Set();
   updateProgress();
   updateFilterToggle();
   render();
@@ -266,8 +267,11 @@ function renderWrite() {
   state.write = state.write && state.write.card ? state.write : { card, answered: false, revealed: false };
   const w = state.write.card;
   const session = state.write;
+  state.writeSeen.add(wordId(w));
+  const seen = state.writeSeen.size;
+  const total = state.filtered.length;
   $("stage").innerHTML = `
-    <div class="session">${esc(w.level)} · ${esc(w.category)}</div>
+    <div class="session">${seen} / ${total} уникальных · ${esc(w.level)} · ${esc(w.category)}</div>
     <div class="face prompt-card">
       <div class="prompt">${esc(front(w))}</div>
       ${state.dir === "en-ru" ? `<div class="ipa">${esc(w.transcription)}</div>` : ""}

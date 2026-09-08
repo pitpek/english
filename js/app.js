@@ -35,9 +35,11 @@ async function boot() {
 
 document.querySelectorAll(".mode").forEach((btn) => {
   btn.onclick = () => {
+    const next = btn.dataset.mode;
+    if (next === "write" && state.mode !== "write") state.writeSeen = new Set();
     document.querySelectorAll(".mode").forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
-    state.mode = btn.dataset.mode;
+    state.mode = next;
     state.learn = null;
     state.write = null;
     state.learnN = 0;
